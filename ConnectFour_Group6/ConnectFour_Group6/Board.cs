@@ -57,7 +57,7 @@ namespace ConnectFour_Group6
             int row = 0;
             bool lowestFound = false;
 
-            while (!lowestFound && row < numOfRows)
+            while (!lowestFound && row < numOfRows - 1)
             {
                 cell = gameBoard[row, c];
                 button = cell.getButton();
@@ -73,14 +73,26 @@ namespace ConnectFour_Group6
             return row;
         }
 
+        public bool checkPos(int r, int c)
+        {
+            if (gameBoard[r, c].getButton().BackColor != playerColor && gameBoard[r, c].getButton().BackColor != libbyColor)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void preview(int c)
         {
             int lr = getLowestRow(c);
-            if (playerTurn)
+            if (playerTurn && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
             {
                 gameBoard[lr, c].getButton().BackColor = playerPreview;
             }
-            else
+            else if (!playerTurn && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
             {
                 gameBoard[lr, c].getButton().BackColor = libbyPreviw;
             }
@@ -100,13 +112,13 @@ namespace ConnectFour_Group6
         public void placePiece(int c)
         {
             int lr = getLowestRow(c);
-
-            if (playerTurn)
+            Debug.WriteLine("Lowest row is: " + lr);
+            if (playerTurn && checkPos(lr, c))
             {
                 gameBoard[lr, c].getButton().BackColor = playerColor;
                 playerTurn = false;
             }
-            else
+            else if(!playerTurn && checkPos(lr, c))
             {
                 gameBoard[lr, c].getButton().BackColor = libbyColor;
                 playerTurn = true;
