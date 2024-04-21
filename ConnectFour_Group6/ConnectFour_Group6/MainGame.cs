@@ -18,6 +18,7 @@ namespace ConnectFour_Group6
         {
             InitializeComponent();
             gameBoard = new Board();
+            Libby libby = new Libby();
             setUpGame();
             Column1.MouseDown += placePiece;
             Column2.MouseDown += placePiece;
@@ -44,9 +45,6 @@ namespace ConnectFour_Group6
             Column7.MouseLeave += clearPreview;
 
 
-
-
-            gameBoard.getCell(0,0).getButton().BackColor = Color.Red;
         }
 
         public void setUpGame()
@@ -79,29 +77,43 @@ namespace ConnectFour_Group6
 
         private void placePiece(object sender, EventArgs e)
         {
-            string btnName;
-            int col;
-            btnName = ((Button)sender).Name;
-            btnName = btnName.Substring(btnName.Length - 1);
-            col = Int32.Parse(btnName) - 1;
-            gameBoard.placePiece(col);
+            if(gameBoard.isPlayerTurn())
+            {
+                string btnName;
+                int col;
+                btnName = ((Button)sender).Name;
+                btnName = btnName.Substring(btnName.Length - 1);
+                col = Int32.Parse(btnName) - 1;
+                gameBoard.placePiece(col);
+            }
+            else
+            {
+                Libby libby = new Libby();
+                libby.startAI(gameBoard);
+            }
             
         }
 
         private void setPreview(object sender, EventArgs e)
         {
-            string btnName;
-            int col;
-            btnName = ((Button)sender).Name;
-            btnName = btnName.Substring(btnName.Length - 1);
-            col = Int32.Parse(btnName) - 1;
 
-            gameBoard.preview(col);
+            if(gameBoard.isPlayerTurn())
+            {
+                string btnName;
+                int col;
+                btnName = ((Button)sender).Name;
+                btnName = btnName.Substring(btnName.Length - 1);
+                col = Int32.Parse(btnName) - 1;
+                gameBoard.preview(col);
+            }
         }
 
         private void clearPreview(object sender, EventArgs e)
         {
-            gameBoard.clearPreview();
+            if (gameBoard.isPlayerTurn())
+            {
+                gameBoard.clearPreview();
+            }
         }
 
         private void MainGame_Load(object sender, EventArgs e)

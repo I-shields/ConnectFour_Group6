@@ -50,6 +50,20 @@ namespace ConnectFour_Group6
             gameBoard[cell.getRow(), cell.getCol()] = cell;
         }
 
+        public Color getPlayerColor()
+        {
+            return playerColor;
+        }
+
+        public Color getLibbyColor()
+        {
+            return libbyColor;
+        }
+
+        public bool isPlayerTurn()
+        {
+            return playerTurn;
+        }
         public int getLowestRow(int c)
         {
             Cell cell;
@@ -111,6 +125,7 @@ namespace ConnectFour_Group6
 
         public void placePiece(int c)
         {
+            Libby libby = new Libby();
             int lr = getLowestRow(c);
             Debug.WriteLine("Lowest row is: " + lr);
             if (playerTurn && checkPos(lr, c))
