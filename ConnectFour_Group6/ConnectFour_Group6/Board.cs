@@ -130,8 +130,10 @@ namespace ConnectFour_Group6
             Debug.WriteLine("Lowest row is: " + lr);
             if (playerTurn && checkPos(lr, c))
             {
+                Cell Placeholder = gameBoard[lr, c];
                 gameBoard[lr, c].getButton().BackColor = playerColor;
                 playerTurn = false;
+                checkWin(Placeholder.getRow(), Placeholder.getCol());
             }
             else if(!playerTurn && checkPos(lr, c))
             {
@@ -140,6 +142,24 @@ namespace ConnectFour_Group6
             }
         }
 
+
+        public void checkWin(int row, int col)
+        {
+            int vertCount = 0;
+            //vert
+            for (int i = 1; i < 4; i++)
+            {
+                if (row - i >= 0 && gameBoard[row - i, col].getButton().BackColor == playerColor)
+                {
+                    
+                    vertCount++;
+                }
+            }
+            if (vertCount==4)
+            {
+                Debug.WriteLine("Read Test Success");
+            }
+        }
     }
 
 }
