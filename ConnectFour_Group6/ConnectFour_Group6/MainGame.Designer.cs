@@ -77,6 +77,7 @@
             Cell_0_6 = new Button();
             Cell_5_6 = new Button();
             Column7 = new Button();
+            EndTurn_Btn = new Button();
             SuspendLayout();
             // 
             // Column1
@@ -479,11 +480,22 @@
             Column7.Text = "Column7";
             Column7.UseVisualStyleBackColor = true;
             // 
+            // EndTurn_Btn
+            // 
+            EndTurn_Btn.Location = new Point(472, 375);
+            EndTurn_Btn.Name = "EndTurn_Btn";
+            EndTurn_Btn.Size = new Size(75, 23);
+            EndTurn_Btn.TabIndex = 49;
+            EndTurn_Btn.Text = "End Turn";
+            EndTurn_Btn.UseVisualStyleBackColor = true;
+            EndTurn_Btn.Click += button1_Click;
+            // 
             // MainGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(EndTurn_Btn);
             Controls.Add(Column1);
             Controls.Add(Column2);
             Controls.Add(Cell_5_0);
@@ -590,5 +602,6 @@
         private Button Cell_0_6;
         private Button Cell_5_6;
         private Button Column7;
+        private Button EndTurn_Btn;
     }
 }

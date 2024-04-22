@@ -56,9 +56,9 @@ namespace ConnectFour_Group6
             int row;
             Cell c;
 
-            foreach( var button in this.Controls.OfType<Button>() )
+            foreach (var button in this.Controls.OfType<Button>())
             {
-                if(button.Text == "")
+                if (button.Text == "")
                 {
                     name = button.Name;
 
@@ -77,7 +77,7 @@ namespace ConnectFour_Group6
 
         private void placePiece(object sender, EventArgs e)
         {
-            if(gameBoard.isPlayerTurn())
+            if (gameBoard.isPlayerTurn())
             {
                 string btnName;
                 int col;
@@ -86,18 +86,13 @@ namespace ConnectFour_Group6
                 col = Int32.Parse(btnName) - 1;
                 gameBoard.placePiece(col);
             }
-            else
-            {
-                Libby libby = new Libby();
-                libby.startAI(gameBoard);
-            }
-            
+
         }
 
         private void setPreview(object sender, EventArgs e)
         {
 
-            if(gameBoard.isPlayerTurn())
+            if (gameBoard.isPlayerTurn())
             {
                 string btnName;
                 int col;
@@ -124,6 +119,12 @@ namespace ConnectFour_Group6
         private void Column5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Libby libby = new Libby();
+            libby.startAI(gameBoard);
         }
     }
 }
