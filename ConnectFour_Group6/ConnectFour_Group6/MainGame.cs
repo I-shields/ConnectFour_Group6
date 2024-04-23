@@ -14,11 +14,12 @@ namespace ConnectFour_Group6
     public partial class MainGame : Form
     {
         private Board gameBoard;
+        private Libby libby;
         public MainGame()
         {
             InitializeComponent();
             gameBoard = new Board();
-            Libby libby = new Libby();
+            libby = new Libby();
             setUpGame();
             Column1.MouseDown += placePiece;
             Column2.MouseDown += placePiece;
@@ -123,7 +124,6 @@ namespace ConnectFour_Group6
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Libby libby = new Libby();
             libby.startAI(gameBoard);
         }
     }
