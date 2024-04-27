@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,12 @@ namespace ConnectFour_Group6
         public void startAI(Board b) 
         {
             Debug.WriteLine("Moves: " + moves);
-            if (!aiColCheck(b) && !aiRowCheck(b) && !aiDiaCheck(b))
+            if (!aiColCheck(b) && !aiRowCheck(b) && !aiDiaCheck(b) && !aiDiaReverseCheck(b))
             {
-                if(!checkCols(b) && !checkRows(b) && !checkDia(b))
+                Debug.WriteLine("No win moves");
+                if(!checkCols(b) && !checkRows(b) && !checkDia(b) && !reverseDia(b))
                 {
+                    Debug.WriteLine("No blocks");
                     aiBuildStrat(b, moves);
                 }
             }
@@ -97,12 +100,12 @@ namespace ConnectFour_Group6
                             }
                         }
 
-                        if (i - 2 > 0 && !placed)
+                        if (i - 2 >= 0 && !placed)
                         {
                             if (b.getCell(j, i - 1).getButton().BackColor == b.getPlayerColor() &&
                                 b.getCell(j, i - 2).getButton().BackColor == b.getPlayerColor())
                             {
-                                if (i - 3 > 0)
+                                if (i - 3 >= 0)
                                 {
                                     if (b.getCell(j, i - 3).getButton().BackColor == SystemColors.Control)
                                     {
@@ -120,6 +123,7 @@ namespace ConnectFour_Group6
                     }
                 }
             }
+
             return placed;
         }
 
@@ -161,30 +165,37 @@ namespace ConnectFour_Group6
         }
 
         public bool reverseDia(Board b)
-        {
+        {           
             int col;
             int row;
+            bool placed = false;
             for (int i = 0; i < b.getNumofCols(); i++)
             {
                 for (int j = 0; j < b.getNumofRows(); j++)
                 {
                     if (b.getCell(j, i).getButton().BackColor == b.getPlayerColor())
                     {
-                        if (i - 2 > 0 && j + 2 > 0)
+                        Debug.WriteLine("Found");
+                        if (i - 2 > 0 && j + 2 < b.getNumofRows())
                         {
-                            if (b.getCell(j - 1, i - 1).getButton().BackColor == b.getPlayerColor() &&
-                                b.getCell(j - 2, i - 2).getButton().BackColor == b.getPlayerColor())
+                            if (b.getCell(j + 1, i - 1).getButton().BackColor == b.getPlayerColor() &&
+                                b.getCell(j + 2, i - 2).getButton().BackColor == b.getPlayerColor())
                             {
-                                if (i - 3 < b.getNumofCols() && j + 3 < b.getNumofRows())
+                                Debug.WriteLine("Found part 2");
+                                if (i - 3 > 0 && j + 3 < b.getNumofRows())
                                 {
-                                    if (b.getCell(j - 3, i - 3).getButton().BackColor == SystemColors.Control)
+                                    Debug.WriteLine("Found part 4");
+                                    if (b.getCell(j + 3, i - 3).getButton().BackColor == SystemColors.Control)
                                     {
                                         row = b.getLowestRow(i - 3);
-                                        if (row == j - 3)
+                                        Debug.WriteLine("Row: " + row);
+                                        Debug.WriteLine("check: " + (i - 2));
+                                        if (row == b.getLowestRow(i - 2))
                                         {
                                             col = i - 3;
                                             b.placePiece(col);
-                                            return true;
+                                            placed = true;
+                                            return placed;
                                         }
                                     }
                                 }
@@ -194,7 +205,7 @@ namespace ConnectFour_Group6
                 }
             }
 
-            return false;
+            return placed;
         }
 
         public bool aiColCheck(Board b)
@@ -339,11 +350,11 @@ namespace ConnectFour_Group6
                         if (i - 2 > 0 && j - 2 > 0)
                         {
                             if (b.getCell(j - 1, i - 1).getButton().BackColor == b.getLibbyColor() &&
-                                b.getCell(j + 2, i - 2).getButton().BackColor == b.getLibbyColor())
+                                b.getCell(j - 2, i - 2).getButton().BackColor == b.getLibbyColor())
                             {
-                                if (i - 3 < b.getNumofCols() && j - 3 < b.getNumofRows())
+                                if (i - 3 > 0 && j - 3 > 0)
                                 {
-                                    if (b.getCell(j - 3, i - 3).getButton().BackColor == SystemColors.Control && b.isPlayerTurn())
+                                    if (b.getCell(j - 3, i - 3).getButton().BackColor == SystemColors.Control)
                                     {
                                         row = b.getLowestRow(i - 3);
                                         if (row == j - 3)
@@ -364,83 +375,7 @@ namespace ConnectFour_Group6
 
         public void aiBuildStrat(Board b, int moves)
         {
-            //get middle most
-            //if player is in the middle, place on top
-            
-            //if player is below, try to build a "roof"
-            //else, build a column, if open
 
-            //if player is on top, place in a column close
-            //to the middle
-
-            //after initial moves, search pieces, and try to build
-            //if unable to build, block the player, if the move
-            //doesn't let the player win
-
-            int middle = b.getNumofCols() / 2;
-
-
-            //first 2 moves, place in center
-            if (moves == 1)
-            {
-                b.placePiece(middle);
-                Debug.WriteLine("Initial");
-            }
-            else
-            {
-                //if we can build a "roof" to the right, build it
-                bool checkright = false;
-                int temp = middle;
-
-                while (!checkright && temp < b.getNumofCols())
-                {
-                    if (b.getLowestRow(temp) == 1 && b.checkPos(b.getLowestRow(temp), temp))
-                    {
-                        b.placePiece(temp);
-                        checkright = true;
-                        Debug.WriteLine("right Roof");
-                    }
-                    temp++;
-                }
-
-                temp = middle;
-
-                //else, try to build a "roof" to the left
-                bool checkleft = false;
-
-                while (!checkleft && !checkright && temp > 0)
-                {
-                    if (b.getLowestRow(temp) == 1 && b.checkPos(b.getLowestRow(temp), temp))
-                    {
-                        b.placePiece(temp);
-                        checkleft = true;
-                        Debug.WriteLine("left Roof");
-                    }
-                    temp--;
-                }
-
-                temp = middle;
-
-                if(!checkleft && !checkright)
-                {
-                    //try to build up
-                    //try to build left
-                    //try to build right
-                    //try to build diagonally
-                    if(!buildCol(b))
-                    {
-                        if(!buildLeft(b))
-                        {
-                            if (!buildRight(b))
-                            {
-                                b.placePiece(0);
-                                Debug.WriteLine("Default");
-                            }
-
-                        }
-                    }
-                }
-            }
         }
 
         public bool buildCol(Board b)
@@ -518,6 +453,23 @@ namespace ConnectFour_Group6
                 }
             }
             return placed;
+        }
+
+        public void placeRandom(Board b)
+        {
+            bool placed = false;
+            for (int i = 0; i < b.getNumofCols(); i++)
+            {
+                for (int j = 0; j < b.getNumofRows(); j++)
+                {
+                    if(b.getCell(j, i).getButton().BackColor == SystemColors.Control && !placed)
+                    {
+                        b.placePiece(i);
+                        placed = true;
+                    }
+                }
+            }
+            placed = false;
         }
 
     }

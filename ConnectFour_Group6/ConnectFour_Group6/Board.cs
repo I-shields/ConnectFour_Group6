@@ -114,6 +114,7 @@ namespace ConnectFour_Group6
             {
                 gameBoard[lr, c].getButton().BackColor = playerPreview;
             }
+
             else if (!playerTurn && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
             {
                 gameBoard[lr, c].getButton().BackColor = libbyPreviw;
@@ -158,7 +159,7 @@ namespace ConnectFour_Group6
                     playerTwoTurn = false;
                     playerTurn = true;
                     //gotta checkwin for player 2 here
-                    //playerTurn = true;}
+                    playerTurn = true;
                 }
               
             }

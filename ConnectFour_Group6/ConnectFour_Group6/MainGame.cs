@@ -166,10 +166,7 @@ namespace ConnectFour_Group6
 
         private void clearPreview(object sender, EventArgs e)
         {
-            if (gameBoard.isPlayerTurn())
-            {
-                gameBoard.clearPreview();
-            }
+            gameBoard.clearPreview();
         }
 
         private void Column5_Click(object sender, EventArgs e)
