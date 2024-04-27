@@ -145,19 +145,110 @@ namespace ConnectFour_Group6
 
         public void checkWin(int row, int col)
         {
-            int vertCount = 0;
             //vert
             for (int i = 1; i < 4; i++)
             {
                 if (row - i >= 0 && gameBoard[row - i, col].getButton().BackColor == playerColor)
                 {
-                    
-                    vertCount++;
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
                 }
             }
-            if (vertCount==4)
+            //left
+            for (int i = 1; i < 4; i++)
             {
-                Debug.WriteLine("Read Test Success");
+                if (col - i >= 0 && gameBoard[row, col-i].getButton().BackColor == playerColor)
+                {
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //right
+            for (int i = 1; i < 4; i++)
+            {
+                if (col + i < 7 && gameBoard[row, col+i].getButton().BackColor == playerColor)
+                {
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //diag left
+            for (int i = 1; i < 4; i++)
+            {
+                if (row + i < 6 && col - i >=0 && gameBoard[row + i, col-i].getButton().BackColor == playerColor)
+                {
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //diag right
+            for (int i = 1; i < 4; i++)
+            {
+                if (row + i < 6 && col + i < 7 && gameBoard[row + i, col + i].getButton().BackColor == playerColor)
+                {
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //diag down right
+            for (int i = 1; i < 4; i++)
+            {
+                if (row - i >=0 && col + i < 7 && gameBoard[row - i, col + i].getButton().BackColor == playerColor)
+                {
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //diag down left
+            for (int i = 1; i < 4; i++)
+            {
+                if (row - i >= 0 && col - i >= 0 && gameBoard[row - i, col -i].getButton().BackColor == playerColor)
+                {
+                    if (i == 3)
+                    {
+                        Debug.WriteLine("Read Test Success");
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }
