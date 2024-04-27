@@ -15,7 +15,7 @@ namespace ConnectFour_Group6
 
         private void StartAI_Click_1(object sender, EventArgs e)
         {
-            MainGame mg = new MainGame();
+            MainGame mg = new MainGame(1);
             this.Hide();
             mg.Show();
         }
@@ -46,6 +46,13 @@ namespace ConnectFour_Group6
 
         private void GameBoard_Click(object sender, EventArgs e)
         {
+        }
+
+        private void btn_pvp_Click(object sender, EventArgs e)
+        {
+            MainGame mg = new MainGame(2);
+            this.Hide();
+            mg.Show();
         }
     }
 }

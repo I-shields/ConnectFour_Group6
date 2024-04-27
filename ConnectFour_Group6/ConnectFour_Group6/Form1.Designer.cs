@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             StartAI = new Button();
+            btn_pvp = new Button();
             SuspendLayout();
             // 
             // StartAI
@@ -41,11 +42,22 @@
             StartAI.UseVisualStyleBackColor = true;
             StartAI.Click += StartAI_Click_1;
             // 
+            // btn_pvp
+            // 
+            btn_pvp.Location = new Point(285, 269);
+            btn_pvp.Name = "btn_pvp";
+            btn_pvp.Size = new Size(171, 23);
+            btn_pvp.TabIndex = 1;
+            btn_pvp.Text = "Player vs. Player";
+            btn_pvp.UseVisualStyleBackColor = true;
+            btn_pvp.Click += btn_pvp_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 517);
+            Controls.Add(btn_pvp);
             Controls.Add(StartAI);
             Name = "Form1";
             Text = "Form1";
@@ -55,5 +67,6 @@
         #endregion
 
         private Button StartAI;
+        private Button btn_pvp;
     }
 }

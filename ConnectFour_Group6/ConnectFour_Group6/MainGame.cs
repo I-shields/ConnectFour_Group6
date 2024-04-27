@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,36 +16,69 @@ namespace ConnectFour_Group6
     {
         private Board gameBoard;
         private Libby libby;
-        public MainGame()
+        private int mode;
+        public MainGame(int selector)
         {
             InitializeComponent();
-            gameBoard = new Board();
-            libby = new Libby();
-            setUpGame();
-            Column1.MouseDown += placePiece;
-            Column2.MouseDown += placePiece;
-            Column3.MouseDown += placePiece;
-            Column4.MouseDown += placePiece;
-            Column5.MouseDown += placePiece;
-            Column6.MouseDown += placePiece;
-            Column7.MouseDown += placePiece;
+            if (selector == 1)
+            {
+                mode = 1;
+                gameBoard = new Board();
+                libby = new Libby();
+                setUpGame();
+                Column1.MouseDown += placePiece;
+                Column2.MouseDown += placePiece;
+                Column3.MouseDown += placePiece;
+                Column4.MouseDown += placePiece;
+                Column5.MouseDown += placePiece;
+                Column6.MouseDown += placePiece;
+                Column7.MouseDown += placePiece;
 
-            Column1.MouseEnter += setPreview;
-            Column2.MouseEnter += setPreview;
-            Column3.MouseEnter += setPreview;
-            Column4.MouseEnter += setPreview;
-            Column5.MouseEnter += setPreview;
-            Column6.MouseEnter += setPreview;
-            Column7.MouseEnter += setPreview;
+                Column1.MouseEnter += setPreview;
+                Column2.MouseEnter += setPreview;
+                Column3.MouseEnter += setPreview;
+                Column4.MouseEnter += setPreview;
+                Column5.MouseEnter += setPreview;
+                Column6.MouseEnter += setPreview;
+                Column7.MouseEnter += setPreview;
 
-            Column1.MouseLeave += clearPreview;
-            Column2.MouseLeave += clearPreview;
-            Column3.MouseLeave += clearPreview;
-            Column4.MouseLeave += clearPreview;
-            Column5.MouseLeave += clearPreview;
-            Column6.MouseLeave += clearPreview;
-            Column7.MouseLeave += clearPreview;
+                Column1.MouseLeave += clearPreview;
+                Column2.MouseLeave += clearPreview;
+                Column3.MouseLeave += clearPreview;
+                Column4.MouseLeave += clearPreview;
+                Column5.MouseLeave += clearPreview;
+                Column6.MouseLeave += clearPreview;
+                Column7.MouseLeave += clearPreview;
+            }
+            if (selector == 2)
+            {
+                mode = 2;
+                gameBoard = new Board();
+                setUpGame();
+                Column1.MouseDown += placePiece;
+                Column2.MouseDown += placePiece;
+                Column3.MouseDown += placePiece;
+                Column4.MouseDown += placePiece;
+                Column5.MouseDown += placePiece;
+                Column6.MouseDown += placePiece;
+                Column7.MouseDown += placePiece;
 
+                Column1.MouseEnter += setPreview;
+                Column2.MouseEnter += setPreview;
+                Column3.MouseEnter += setPreview;
+                Column4.MouseEnter += setPreview;
+                Column5.MouseEnter += setPreview;
+                Column6.MouseEnter += setPreview;
+                Column7.MouseEnter += setPreview;
+
+                Column1.MouseLeave += clearPreview;
+                Column2.MouseLeave += clearPreview;
+                Column3.MouseLeave += clearPreview;
+                Column4.MouseLeave += clearPreview;
+                Column5.MouseLeave += clearPreview;
+                Column6.MouseLeave += clearPreview;
+                Column7.MouseLeave += clearPreview;
+            }
 
         }
 
@@ -87,6 +121,15 @@ namespace ConnectFour_Group6
                 col = Int32.Parse(btnName) - 1;
                 gameBoard.placePiece(col);
             }
+            else if (gameBoard.isPlayerTwoTurn())
+            {
+                string btnName;
+                int col;
+                btnName = ((Button)sender).Name;
+                btnName = btnName.Substring(btnName.Length - 1);
+                col = Int32.Parse(btnName) - 1;
+                gameBoard.placePiece(col);
+            }
 
         }
 
@@ -94,6 +137,15 @@ namespace ConnectFour_Group6
         {
 
             if (gameBoard.isPlayerTurn())
+            {
+                string btnName;
+                int col;
+                btnName = ((Button)sender).Name;
+                btnName = btnName.Substring(btnName.Length - 1);
+                col = Int32.Parse(btnName) - 1;
+                gameBoard.preview(col);
+            }
+            else if (gameBoard.isPlayerTwoTurn())
             {
                 string btnName;
                 int col;
@@ -112,11 +164,6 @@ namespace ConnectFour_Group6
             }
         }
 
-        private void MainGame_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Column5_Click(object sender, EventArgs e)
         {
 
@@ -124,7 +171,29 @@ namespace ConnectFour_Group6
 
         private void button1_Click(object sender, EventArgs e)
         {
-            libby.startAI(gameBoard);
+            if (mode == 1)
+            {
+                gameBoard.setPlayerTurn(false);
+                libby.startAI(gameBoard);
+                gameBoard.setPlayerTurn(true);
+            }
+            else
+            {
+                if (gameBoard.isPlayerTurn())
+                {
+                    Debug.WriteLine("player two turn");
+                    gameBoard.setPlayerTurn(false);
+                    gameBoard.setPlayerTwoTurn(true);
+                }
+                else
+                {
+                    gameBoard.setPlayerTurn(true);
+                    gameBoard.setPlayerTwoTurn(false);
+                }
+            }
         }
+
+        public int getMode()
+        { return mode; }
     }
 }

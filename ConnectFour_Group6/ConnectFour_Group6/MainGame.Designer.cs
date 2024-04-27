@@ -547,7 +547,6 @@
             Controls.Add(Cell_4_6);
             Name = "MainGame";
             Text = "MainGame";
-            Load += MainGame_Load;
             ResumeLayout(false);
         }
 

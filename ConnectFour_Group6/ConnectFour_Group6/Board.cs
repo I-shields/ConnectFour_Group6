@@ -17,7 +17,8 @@ namespace ConnectFour_Group6
         Cell[,] gameBoard = new Cell[numOfRows, numOfCols];
 
         bool gameOver;
-        bool playerTurn = true;
+        private bool playerTurn = true;
+        private bool playerTwoTurn = false;
         Color playerColor = Color.Red;
         Color playerPreview = Color.FromArgb(50, 255, 0, 0);
 
@@ -125,131 +126,264 @@ namespace ConnectFour_Group6
 
         public void placePiece(int c)
         {
-            Libby libby = new Libby();
             int lr = getLowestRow(c);
             Debug.WriteLine("Lowest row is: " + lr);
             if (playerTurn && checkPos(lr, c))
             {
                 Cell Placeholder = gameBoard[lr, c];
                 gameBoard[lr, c].getButton().BackColor = playerColor;
-                playerTurn = false;
                 checkWin(Placeholder.getRow(), Placeholder.getCol());
             }
             else if(!playerTurn && checkPos(lr, c))
             {
-                gameBoard[lr, c].getButton().BackColor = libbyColor;
-                playerTurn = true;
+                if (playerTwoTurn)
+                {
+                    Cell Placeholder = gameBoard[lr, c];
+                    gameBoard[lr, c].getButton().BackColor = libbyColor;
+                    //checkWin(Placeholder.getRow(), Placeholder.getCol());
+                }
+                else
+                {
+                    gameBoard[lr, c].getButton().BackColor = libbyColor;
+                    //playerTurn = true;
+                }
             }
         }
 
 
         public void checkWin(int row, int col)
         {
-            //vert
-            for (int i = 1; i < 4; i++)
+            if (playerTurn)
             {
-                if (row - i >= 0 && gameBoard[row - i, col].getButton().BackColor == playerColor)
+                //vert
+                for (int i = 1; i < 4; i++)
                 {
-                    if (i == 3)
+                    if (row - i >= 0 && gameBoard[row - i, col].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+                //left
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
-                }
-            }
-            //left
-            for (int i = 1; i < 4; i++)
-            {
-                if (col - i >= 0 && gameBoard[row, col-i].getButton().BackColor == playerColor)
-                {
-                    if (i == 3)
+                    if (col - i >= 0 && gameBoard[row, col - i].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+                //right
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
-                }
-            }
-            //right
-            for (int i = 1; i < 4; i++)
-            {
-                if (col + i < 7 && gameBoard[row, col+i].getButton().BackColor == playerColor)
-                {
-                    if (i == 3)
+                    if (col + i < 7 && gameBoard[row, col + i].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+                //diag left
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
-                }
-            }
-            //diag left
-            for (int i = 1; i < 4; i++)
-            {
-                if (row + i < 6 && col - i >=0 && gameBoard[row + i, col-i].getButton().BackColor == playerColor)
-                {
-                    if (i == 3)
+                    if (row + i < 6 && col - i >= 0 && gameBoard[row + i, col - i].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+                //diag right
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
-                }
-            }
-            //diag right
-            for (int i = 1; i < 4; i++)
-            {
-                if (row + i < 6 && col + i < 7 && gameBoard[row + i, col + i].getButton().BackColor == playerColor)
-                {
-                    if (i == 3)
+                    if (row + i < 6 && col + i < 7 && gameBoard[row + i, col + i].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+                //diag down right
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
-                }
-            }
-            //diag down right
-            for (int i = 1; i < 4; i++)
-            {
-                if (row - i >=0 && col + i < 7 && gameBoard[row - i, col + i].getButton().BackColor == playerColor)
-                {
-                    if (i == 3)
+                    if (row - i >= 0 && col + i < 7 && gameBoard[row - i, col + i].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+                //diag down left
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
-                }
-            }
-            //diag down left
-            for (int i = 1; i < 4; i++)
-            {
-                if (row - i >= 0 && col - i >= 0 && gameBoard[row - i, col -i].getButton().BackColor == playerColor)
-                {
-                    if (i == 3)
+                    if (row - i >= 0 && col - i >= 0 && gameBoard[row - i, col - i].getButton().BackColor == playerColor)
                     {
-                        Debug.WriteLine("Read Test Success");
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+            }
+            else
+            {
+                //vert
+                for (int i = 1; i < 4; i++)
                 {
-                    break;
+                    if (row - i >= 0 && gameBoard[row - i, col].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //left
+                for (int i = 1; i < 4; i++)
+                {
+                    if (col - i >= 0 && gameBoard[row, col - i].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //right
+                for (int i = 1; i < 4; i++)
+                {
+                    if (col + i < 7 && gameBoard[row, col + i].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //diag left
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row + i < 6 && col - i >= 0 && gameBoard[row + i, col - i].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //diag right
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row + i < 6 && col + i < 7 && gameBoard[row + i, col + i].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //diag down right
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row - i >= 0 && col + i < 7 && gameBoard[row - i, col + i].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //diag down left
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row - i >= 0 && col - i >= 0 && gameBoard[row - i, col - i].getButton().BackColor == libbyColor)
+                    {
+                        if (i == 3)
+                        {
+                            Debug.WriteLine("Read Test Success");
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
+        }
+
+        public void setPlayerTurn(bool b)
+        {
+            playerTurn = b;
+        }
+
+        public void setPlayerTwoTurn(bool b)
+        {
+            playerTwoTurn = b;
+        }
+
+        public bool isPlayerTwoTurn()
+        {
+            return playerTwoTurn;
         }
     }
 
