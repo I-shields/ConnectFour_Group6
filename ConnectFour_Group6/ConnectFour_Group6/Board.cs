@@ -19,12 +19,19 @@ namespace ConnectFour_Group6
         bool gameOver;
         private bool playerTurn = true;
         private bool playerTwoTurn = false;
+        int mode;
+
         Color playerColor = Color.Red;
         Color playerPreview = Color.FromArgb(50, 255, 0, 0);
 
         //====AI IS KNOWN AS LIBBY!!====
         Color libbyColor = Color.Yellow;
         Color libbyPreviw = Color.FromArgb(50, 255, 222, 0);
+
+        public Board(int m)
+        {
+            mode = m;
+        }
 
         public int getNumofRows()
         {
@@ -133,20 +140,27 @@ namespace ConnectFour_Group6
                 Cell Placeholder = gameBoard[lr, c];
                 gameBoard[lr, c].getButton().BackColor = playerColor;
                 checkWin(Placeholder.getRow(), Placeholder.getCol());
+                playerTurn = false;
+                playerTwoTurn = true;
             }
             else if(!playerTurn && checkPos(lr, c))
             {
-                if (playerTwoTurn)
+                if (mode == 1)
+                {
+                    gameBoard[lr, c].getButton().BackColor = libbyColor;
+                    //gotta checkwin for ai here, haven't done that yet
+                    //checkWin(Placeholder.getRow(), Placeholder.getCol())
+                }
+                if (mode == 2)
                 {
                     Cell Placeholder = gameBoard[lr, c];
                     gameBoard[lr, c].getButton().BackColor = libbyColor;
-                    //checkWin(Placeholder.getRow(), Placeholder.getCol());
+                    playerTwoTurn = false;
+                    playerTurn = true;
+                    //gotta checkwin for player 2 here
+                    //playerTurn = true;}
                 }
-                else
-                {
-                    gameBoard[lr, c].getButton().BackColor = libbyColor;
-                    //playerTurn = true;
-                }
+              
             }
         }
 

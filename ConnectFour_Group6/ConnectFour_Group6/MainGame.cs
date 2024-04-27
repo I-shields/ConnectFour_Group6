@@ -17,13 +17,15 @@ namespace ConnectFour_Group6
         private Board gameBoard;
         private Libby libby;
         private int mode;
-        public MainGame(int selector)
+        private Form1 form1;
+        public MainGame(int selector, Form1 form)
         {
             InitializeComponent();
+            form1 = form;
             if (selector == 1)
             {
                 mode = 1;
-                gameBoard = new Board();
+                gameBoard = new Board(mode);
                 libby = new Libby();
                 setUpGame();
                 Column1.MouseDown += placePiece;
@@ -52,8 +54,9 @@ namespace ConnectFour_Group6
             }
             if (selector == 2)
             {
+                EndTurn_Btn.Visible = false;
                 mode = 2;
-                gameBoard = new Board();
+                gameBoard = new Board(mode);
                 setUpGame();
                 Column1.MouseDown += placePiece;
                 Column2.MouseDown += placePiece;
@@ -79,6 +82,11 @@ namespace ConnectFour_Group6
                 Column6.MouseLeave += clearPreview;
                 Column7.MouseLeave += clearPreview;
             }
+
+        }
+
+        public MainGame()
+        {
 
         }
 
@@ -177,23 +185,24 @@ namespace ConnectFour_Group6
                 libby.startAI(gameBoard);
                 gameBoard.setPlayerTurn(true);
             }
-            else
-            {
-                if (gameBoard.isPlayerTurn())
-                {
-                    Debug.WriteLine("player two turn");
-                    gameBoard.setPlayerTurn(false);
-                    gameBoard.setPlayerTwoTurn(true);
-                }
-                else
-                {
-                    gameBoard.setPlayerTurn(true);
-                    gameBoard.setPlayerTwoTurn(false);
-                }
-            }
         }
 
         public int getMode()
         { return mode; }
+
+        private void btn_showPrevGame_Click(object sender, EventArgs e)
+        {
+            if (form1.getPrevGame() != null)
+            {
+                form1.getPrevGame().Show();
+            }
+        }
+
+        private void btn_PlayAgain_Click(object sender, EventArgs e)
+        {
+            form1.setPrevGame(this);
+            this.Hide();
+            form1.Show();
+        }
     }
 }

@@ -78,6 +78,8 @@
             Cell_5_6 = new Button();
             Column7 = new Button();
             EndTurn_Btn = new Button();
+            btn_showPrevGame = new Button();
+            btn_PlayAgain = new Button();
             SuspendLayout();
             // 
             // Column1
@@ -490,11 +492,33 @@
             EndTurn_Btn.UseVisualStyleBackColor = true;
             EndTurn_Btn.Click += button1_Click;
             // 
+            // btn_showPrevGame
+            // 
+            btn_showPrevGame.Location = new Point(499, 12);
+            btn_showPrevGame.Name = "btn_showPrevGame";
+            btn_showPrevGame.Size = new Size(176, 23);
+            btn_showPrevGame.TabIndex = 50;
+            btn_showPrevGame.Text = "Show Previous Game";
+            btn_showPrevGame.UseVisualStyleBackColor = true;
+            btn_showPrevGame.Click += btn_showPrevGame_Click;
+            // 
+            // btn_PlayAgain
+            // 
+            btn_PlayAgain.Location = new Point(499, 41);
+            btn_PlayAgain.Name = "btn_PlayAgain";
+            btn_PlayAgain.Size = new Size(176, 23);
+            btn_PlayAgain.TabIndex = 51;
+            btn_PlayAgain.Text = "Play Again/Restart";
+            btn_PlayAgain.UseVisualStyleBackColor = true;
+            btn_PlayAgain.Click += btn_PlayAgain_Click;
+            // 
             // MainGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_PlayAgain);
+            Controls.Add(btn_showPrevGame);
             Controls.Add(EndTurn_Btn);
             Controls.Add(Column1);
             Controls.Add(Column2);
@@ -602,5 +626,7 @@
         private Button Cell_5_6;
         private Button Column7;
         private Button EndTurn_Btn;
+        private Button btn_showPrevGame;
+        private Button btn_PlayAgain;
     }
 }

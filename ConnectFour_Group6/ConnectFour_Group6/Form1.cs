@@ -8,6 +8,7 @@ namespace ConnectFour_Group6
     public partial class Form1 : Form
     //required variables
     {
+        MainGame prevgame = new MainGame();
         public Form1()
         {
             InitializeComponent();
@@ -15,7 +16,7 @@ namespace ConnectFour_Group6
 
         private void StartAI_Click_1(object sender, EventArgs e)
         {
-            MainGame mg = new MainGame(1);
+            MainGame mg = new MainGame(1, this);
             this.Hide();
             mg.Show();
         }
@@ -50,9 +51,19 @@ namespace ConnectFour_Group6
 
         private void btn_pvp_Click(object sender, EventArgs e)
         {
-            MainGame mg = new MainGame(2);
+            MainGame mg = new MainGame(2, this);
             this.Hide();
             mg.Show();
+        }
+
+        public void setPrevGame(MainGame game)
+        {
+            prevgame = game;
+        }
+
+        public MainGame getPrevGame()
+        {
+            return prevgame;
         }
     }
 }
