@@ -80,6 +80,7 @@
             EndTurn_Btn = new Button();
             btn_showPrevGame = new Button();
             btn_PlayAgain = new Button();
+            lbl_winText = new Label();
             SuspendLayout();
             // 
             // Column1
@@ -512,11 +513,22 @@
             btn_PlayAgain.UseVisualStyleBackColor = true;
             btn_PlayAgain.Click += btn_PlayAgain_Click;
             // 
+            // lbl_winText
+            // 
+            lbl_winText.AutoSize = true;
+            lbl_winText.Location = new Point(499, 86);
+            lbl_winText.Name = "lbl_winText";
+            lbl_winText.Size = new Size(117, 15);
+            lbl_winText.TabIndex = 52;
+            lbl_winText.Text = "Win Text Placeholder";
+            lbl_winText.Visible = false;
+            // 
             // MainGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbl_winText);
             Controls.Add(btn_PlayAgain);
             Controls.Add(btn_showPrevGame);
             Controls.Add(EndTurn_Btn);
@@ -572,6 +584,7 @@
             Name = "MainGame";
             Text = "MainGame";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -628,5 +641,6 @@
         private Button EndTurn_Btn;
         private Button btn_showPrevGame;
         private Button btn_PlayAgain;
+        private Label lbl_winText;
     }
 }
