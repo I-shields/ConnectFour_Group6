@@ -73,6 +73,7 @@ namespace ConnectFour_Group6
         {
             return playerTurn;
         }
+
         public int getLowestRow(int c)
         {
             Cell cell;
@@ -80,7 +81,7 @@ namespace ConnectFour_Group6
             int row = 0;
             bool lowestFound = false;
 
-            while (!lowestFound && row < numOfRows - 1)
+            while (!lowestFound && row < numOfRows)
             {
                 cell = gameBoard[row, c];
                 button = cell.getButton();
@@ -98,7 +99,7 @@ namespace ConnectFour_Group6
 
         public bool checkPos(int r, int c)
         {
-            if (gameBoard[r, c].getButton().BackColor != playerColor && gameBoard[r, c].getButton().BackColor != libbyColor)
+            if (r < numOfRows && c < numOfCols && gameBoard[r, c].getButton().BackColor != playerColor && gameBoard[r, c].getButton().BackColor != libbyColor)
             {
                 return true;
             }
@@ -111,12 +112,12 @@ namespace ConnectFour_Group6
         public void preview(int c)
         {
             int lr = getLowestRow(c);
-            if (playerTurn && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
+            if (playerTurn && lr < numOfRows && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
             {
                 gameBoard[lr, c].getButton().BackColor = playerPreview;
             }
 
-            else if (!playerTurn && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
+            else if (!playerTurn && lr < numOfRows && gameBoard[lr, c].getButton().BackColor != playerColor && gameBoard[lr, c].getButton().BackColor != libbyColor)
             {
                 gameBoard[lr, c].getButton().BackColor = libbyPreviw;
             }
@@ -141,6 +142,7 @@ namespace ConnectFour_Group6
             {
                 curcell = gameBoard[lr, c];
                 gameBoard[lr, c].getButton().BackColor = playerColor;
+                gameBoard[lr, c].setPlayer(1);
                 playerTurn = false;
                 if (mode == 2)
                 {
@@ -153,6 +155,7 @@ namespace ConnectFour_Group6
                 {
                     curcell = gameBoard[lr, c];
                     gameBoard[lr, c].getButton().BackColor = libbyColor;
+                    gameBoard[lr, c].setPlayer(2);
                     //gotta checkwin for ai here, haven't done that yet EDIT: checkwin for ai in maingame now, still haven't done it lol
 
                 }

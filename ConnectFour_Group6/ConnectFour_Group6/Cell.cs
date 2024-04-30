@@ -11,17 +11,19 @@ namespace ConnectFour_Group6
         int row;
         int col;
         Button btn;
+        int player;
 
         public Cell()
         {
 
         }
 
-        public Cell(int r, int c, Button b)
+        public Cell(int r, int c, Button b, int p)
         {
             row = r;
             col = c;
             btn = b;
+            player = p;
         }
 
         //====Getters====
@@ -54,6 +56,16 @@ namespace ConnectFour_Group6
         public void setButton(Button b)
         {
             btn = b;
+        }
+
+        public void setPlayer(int p)
+        {
+            player = p;
+        }
+
+        public int getPlayer()
+        {
+            return player;
         }
     }
 }

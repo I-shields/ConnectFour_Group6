@@ -16,7 +16,7 @@ namespace ConnectFour_Group6
     public partial class MainGame : Form
     {
         private Board gameBoard;
-        private Libby libby;
+        private Stacy stacy;
         private int mode;
         private Form1 form1;
         public MainGame(int selector, Form1 form)
@@ -27,7 +27,7 @@ namespace ConnectFour_Group6
             {
                 mode = 1;
                 gameBoard = new Board(mode);
-                libby = new Libby();
+                stacy = new Stacy();
                 setUpGame();
                 Column1.MouseDown += placePiece;
                 Column2.MouseDown += placePiece;
@@ -113,7 +113,7 @@ namespace ConnectFour_Group6
                     posDelim = name.IndexOf(delim);
                     col = Int32.Parse(name.Substring(posDelim + 1));
 
-                    c = new Cell(row, col, button);
+                    c = new Cell(row, col, button, 0);
                     gameBoard.setGameBoardCell(c);
                 }
             }
@@ -179,10 +179,12 @@ namespace ConnectFour_Group6
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int column;
             if (mode == 1)
             {
                 gameBoard.setPlayerTurn(false);
-                libby.startAI(gameBoard);
+                column = stacy.startStacy(gameBoard);
+                gameBoard.placePiece(column);
                 gameBoard.setPlayerTurn(true);
             }
         }
