@@ -77,10 +77,13 @@
             Cell_0_6 = new Button();
             Cell_5_6 = new Button();
             Column7 = new Button();
-            EndTurn_Btn = new Button();
             btn_showPrevGame = new Button();
             btn_PlayAgain = new Button();
             lbl_winText = new Label();
+            Depth_box = new TextBox();
+            Depth_Lbl = new Label();
+            WarningRtb = new RichTextBox();
+            Iterations_Lbl = new Label();
             SuspendLayout();
             // 
             // Column1
@@ -483,16 +486,6 @@
             Column7.Text = "Column7";
             Column7.UseVisualStyleBackColor = true;
             // 
-            // EndTurn_Btn
-            // 
-            EndTurn_Btn.Location = new Point(472, 375);
-            EndTurn_Btn.Name = "EndTurn_Btn";
-            EndTurn_Btn.Size = new Size(75, 23);
-            EndTurn_Btn.TabIndex = 49;
-            EndTurn_Btn.Text = "End Turn";
-            EndTurn_Btn.UseVisualStyleBackColor = true;
-            EndTurn_Btn.Click += button1_Click;
-            // 
             // btn_showPrevGame
             // 
             btn_showPrevGame.Location = new Point(499, 12);
@@ -523,15 +516,53 @@
             lbl_winText.Text = "Win Text Placeholder";
             lbl_winText.Visible = false;
             // 
+            // Depth_box
+            // 
+            Depth_box.Location = new Point(446, 292);
+            Depth_box.Name = "Depth_box";
+            Depth_box.Size = new Size(100, 23);
+            Depth_box.TabIndex = 53;
+            // 
+            // Depth_Lbl
+            // 
+            Depth_Lbl.AutoSize = true;
+            Depth_Lbl.Location = new Point(467, 274);
+            Depth_Lbl.Name = "Depth_Lbl";
+            Depth_Lbl.Size = new Size(52, 15);
+            Depth_Lbl.TabIndex = 54;
+            Depth_Lbl.Text = "AI depth";
+            // 
+            // WarningRtb
+            // 
+            WarningRtb.BorderStyle = BorderStyle.None;
+            WarningRtb.Location = new Point(446, 321);
+            WarningRtb.Name = "WarningRtb";
+            WarningRtb.ReadOnly = true;
+            WarningRtb.Size = new Size(100, 77);
+            WarningRtb.TabIndex = 56;
+            WarningRtb.Text = "Warning, large numbers might crash the program. The default depth is 5";
+            WarningRtb.TextChanged += WarningRtb_TextChanged;
+            // 
+            // Iterations_Lbl
+            // 
+            Iterations_Lbl.AutoSize = true;
+            Iterations_Lbl.Location = new Point(552, 321);
+            Iterations_Lbl.Name = "Iterations_Lbl";
+            Iterations_Lbl.Size = new Size(0, 15);
+            Iterations_Lbl.TabIndex = 57;
+            // 
             // MainGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Iterations_Lbl);
+            Controls.Add(WarningRtb);
+            Controls.Add(Depth_Lbl);
+            Controls.Add(Depth_box);
             Controls.Add(lbl_winText);
             Controls.Add(btn_PlayAgain);
             Controls.Add(btn_showPrevGame);
-            Controls.Add(EndTurn_Btn);
             Controls.Add(Column1);
             Controls.Add(Column2);
             Controls.Add(Cell_5_0);
@@ -638,9 +669,12 @@
         private Button Cell_0_6;
         private Button Cell_5_6;
         private Button Column7;
-        private Button EndTurn_Btn;
         private Button btn_showPrevGame;
         private Button btn_PlayAgain;
         private Label lbl_winText;
+        private TextBox Depth_box;
+        private Label Depth_Lbl;
+        private RichTextBox WarningRtb;
+        private Label Iterations_Lbl;
     }
 }

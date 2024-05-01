@@ -17,7 +17,6 @@ namespace ConnectFour_Group6
         Cell[,] gameBoard = new Cell[numOfRows, numOfCols];
         private Cell curcell;
 
-        bool gameOver;
         private bool playerTurn = true;
         private bool playerTwoTurn = false;
         int mode;
@@ -144,10 +143,7 @@ namespace ConnectFour_Group6
                 gameBoard[lr, c].getButton().BackColor = playerColor;
                 gameBoard[lr, c].setPlayer(1);
                 playerTurn = false;
-                if (mode == 2)
-                {
-                    playerTwoTurn = true;
-                }
+                playerTwoTurn = true;
             }
             else if (!playerTurn && checkPos(lr, c))
             {
@@ -156,7 +152,8 @@ namespace ConnectFour_Group6
                     curcell = gameBoard[lr, c];
                     gameBoard[lr, c].getButton().BackColor = libbyColor;
                     gameBoard[lr, c].setPlayer(2);
-                    //gotta checkwin for ai here, haven't done that yet EDIT: checkwin for ai in maingame now, still haven't done it lol
+                    playerTwoTurn=false;
+                    playerTurn = true;
 
                 }
                 if (mode == 2)
@@ -166,8 +163,6 @@ namespace ConnectFour_Group6
                     gameBoard[lr, c].getButton().BackColor = libbyColor;
                     playerTwoTurn = false;
                     playerTurn = true;
-
-                    //playerTurn = true;}
                 }
 
             }

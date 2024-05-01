@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -19,12 +20,16 @@ namespace ConnectFour_Group6
         private Stacy stacy;
         private int mode;
         private Form1 form1;
+        private bool depthSet = false;
+        private SaveInfo saver;
+        private int depth;
         public MainGame(int selector, Form1 form)
         {
             InitializeComponent();
             form1 = form;
             if (selector == 1)
             {
+                saver = new SaveInfo();
                 mode = 1;
                 gameBoard = new Board(mode);
                 stacy = new Stacy();
@@ -55,7 +60,6 @@ namespace ConnectFour_Group6
             }
             if (selector == 2)
             {
-                EndTurn_Btn.Visible = false;
                 mode = 2;
                 gameBoard = new Board(mode);
                 setUpGame();
@@ -129,9 +133,65 @@ namespace ConnectFour_Group6
                 btnName = btnName.Substring(btnName.Length - 1);
                 col = Int32.Parse(btnName) - 1;
                 gameBoard.placePiece(col);
-                displayWinState(checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()), 1);
+                //check for win
+                if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
+                {
+                    //if it's player vs AI save info
+                    if (mode == 1)
+                    {
+                        saver.updateFile(1, depth);
+                    }
+                    displayWinState(true, 1);
+                }
+                //if it's player vs AI, run the AI
+                if (mode == 1)
+                {
+                    int column;
+                    depthSet = true;
+                    if (Depth_box.Text != "")
+                    {
+                        depth = Int32.Parse(Depth_box.Text);
+                        if (depth <= 0)
+                        {
+                            depth = 5;
+                        }
+                    }
+                    else
+                    {
+                        depth = 5;
+                    }
+
+                    column = stacy.initialBoard(gameBoard, depth);
+
+                    gameBoard.placePiece(column);
+
+                    if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
+                    {
+                        Debug.WriteLine("Checking win");
+                        saver.updateFile(2, depth);
+                        displayWinState(true, 2);
+                    }
+                    string numsofboards = String.Format($"{stacy.getIter():n0}");
+                    Iterations_Lbl.Text = ("Boards evaluated by AI: " + numsofboards);
+                    stacy.setIter(0);
+
+                    if (depthSet)
+                    {
+                        Depth_box.Visible = false;
+                        WarningRtb.Visible = false;
+                        Depth_Lbl.Visible = false;
+                        Depth_box.Visible = false;
+                    }
+                    else
+                    {
+                        Depth_box.Visible = true;
+                        WarningRtb.Visible = true;
+                        Depth_Lbl.Visible = true;
+                        Depth_box.Visible = true;
+                    }
+                }
             }
-            else if (gameBoard.isPlayerTwoTurn())
+            else if (gameBoard.isPlayerTwoTurn() && mode == 2)
             {
                 string btnName;
                 int col;
@@ -139,7 +199,10 @@ namespace ConnectFour_Group6
                 btnName = btnName.Substring(btnName.Length - 1);
                 col = Int32.Parse(btnName) - 1;
                 gameBoard.placePiece(col);
-                displayWinState(checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()), 2);
+                if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
+                {
+                    displayWinState(true, 2);
+                }
             }
 
         }
@@ -179,14 +242,6 @@ namespace ConnectFour_Group6
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int column;
-            if (mode == 1)
-            {
-                gameBoard.setPlayerTurn(false);
-                column = stacy.startStacy(gameBoard);
-                gameBoard.placePiece(column);
-                gameBoard.setPlayerTurn(true);
-            }
         }
 
         public int getMode()
@@ -202,6 +257,7 @@ namespace ConnectFour_Group6
 
         private void btn_PlayAgain_Click(object sender, EventArgs e)
         {
+            depth = 0;
             form1.setPrevGame(this);
             this.Hide();
             form1.Show();
@@ -468,6 +524,11 @@ namespace ConnectFour_Group6
             }
             else { return false; }
             //gotta add one for the robot
+        }
+
+        private void WarningRtb_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

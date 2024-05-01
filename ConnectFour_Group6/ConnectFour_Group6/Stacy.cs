@@ -83,13 +83,23 @@ namespace ConnectFour_Group6
 
         public int startStacy(Board b)
         {
-            int column;
-            column = initialBoard(b);
+            int column = 0;
+            //column = initialBoard(b);
 
             return column;
         }
 
-        public int initialBoard(Board b)
+        public int getIter()
+        {
+            return iter;
+        }
+
+        public void setIter(int it)
+        {
+            iter = it;
+        }
+
+        public int initialBoard(Board b, int depth)
         {
             int column;
             Color aiColor = Color.Yellow;
@@ -111,7 +121,7 @@ namespace ConnectFour_Group6
                 }
             }
 
-            column = buildNext(boardArray);
+            column = buildNext(boardArray, depth);
             return column;
         }
 
@@ -162,7 +172,7 @@ namespace ConnectFour_Group6
             return score;
         }
 
-        private int buildNext(Cell[,] b)
+        private int buildNext(Cell[,] b, int depth)
         {
             Cell[,] gameBoard;
 
@@ -172,6 +182,7 @@ namespace ConnectFour_Group6
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
+            depth = 6;
             // the depth is the number passed to the function
             int[] result = backToTheFuture(gameBoard, 8, alpha, beta, true);
             int move = result[0];
@@ -187,7 +198,6 @@ namespace ConnectFour_Group6
                     }
                 }
             }
-            iter = 0;
             return move;
 
         }
