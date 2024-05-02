@@ -273,12 +273,23 @@ namespace ConnectFour_Group6
                     gameBoard.setPlayerTurn(false);
                     gameBoard.setPlayerTwoTurn(false);
                 }
-                if (player == 2)
+                else if (player == 2)
                 {
-                    lbl_winText.Text = "Player 2 wins!";
-                    lbl_winText.Visible = true;
-                    gameBoard.setPlayerTurn(false);
-                    gameBoard.setPlayerTwoTurn(false);
+                    if (mode == 1)
+                    {
+                        lbl_winText.Text = "AI wins";
+                        lbl_winText.Visible = true;
+                        gameBoard.setPlayerTurn(false);
+                        gameBoard.setPlayerTwoTurn(false);
+                    }
+                    else
+                    {
+                        lbl_winText.Text = "Player 2 wins!";
+                        lbl_winText.Visible = true;
+                        gameBoard.setPlayerTurn(false);
+                        gameBoard.setPlayerTwoTurn(false);
+                    }
+                    
                 }
             }
             //add something here for the robot as well
@@ -287,10 +298,14 @@ namespace ConnectFour_Group6
 
         public bool checkWin(int row, int col)
         {
+            int diagrightcount = 1;
+            int diagleftcount = 1;
+            int horcount = 1;
             Color playerColor = Color.Red;
             Color libbyColor = Color.Yellow;
             if (!gameBoard.isPlayerTurn())
             {
+                
                 //vert
                 for (int i = 1; i < 4; i++)
                 {
@@ -312,11 +327,7 @@ namespace ConnectFour_Group6
                 {
                     if (col - i >= 0 && gameBoard.getGameBoard()[row, col - i].getButton().BackColor == playerColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        horcount++;
                     }
                     else
                     {
@@ -328,59 +339,25 @@ namespace ConnectFour_Group6
                 {
                     if (col + i < 7 && gameBoard.getGameBoard()[row, col + i].getButton().BackColor == playerColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        horcount++;
                     }
                     else
                     {
                         break;
                     }
                 }
-                //diag left
-                for (int i = 1; i < 4; i++)
+                if (horcount==4)
                 {
-                    if (row + i < 6 && col - i >= 0 && gameBoard.getGameBoard()[row + i, col - i].getButton().BackColor == playerColor)
-                    {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    Debug.WriteLine("Read Test Successful");
+                    return true;
                 }
-                //diag right
+                
+                //diag up right
                 for (int i = 1; i < 4; i++)
                 {
                     if (row + i < 6 && col + i < 7 && gameBoard.getGameBoard()[row + i, col + i].getButton().BackColor == playerColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                //diag down right
-                for (int i = 1; i < 4; i++)
-                {
-                    if (row - i >= 0 && col + i < 7 && gameBoard.getGameBoard()[row - i, col + i].getButton().BackColor == playerColor)
-                    {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        diagrightcount++;
                     }
                     else
                     {
@@ -392,20 +369,51 @@ namespace ConnectFour_Group6
                 {
                     if (row - i >= 0 && col - i >= 0 && gameBoard.getGameBoard()[row - i, col - i].getButton().BackColor == playerColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        diagrightcount++;
                     }
                     else
                     {
                         break;
                     }
                 }
+                if (diagrightcount == 4)
+                {
+                    Debug.WriteLine("Read Test Successful");
+                    return true;
+                }
+                //diag up left
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row + i < 6 && col - i >= 0 && gameBoard.getGameBoard()[row + i, col - i].getButton().BackColor == playerColor)
+                    {
+                        diagleftcount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //diag down right
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row - i >= 0 && col + i < 7 && gameBoard.getGameBoard()[row - i, col + i].getButton().BackColor == playerColor)
+                    {
+                        diagleftcount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (diagleftcount== 4)
+                {
+                    Debug.WriteLine("Read Test Successful");
+                    return true;
+                }
+                
                 return false;
             }
-            else if (!gameBoard.isPlayerTwoTurn())
+            else if (!gameBoard.isPlayerTwoTurn() || mode==1)
             {
                 //vert
                 for (int i = 1; i < 4; i++)
@@ -428,11 +436,7 @@ namespace ConnectFour_Group6
                 {
                     if (col - i >= 0 && gameBoard.getGameBoard()[row, col - i].getButton().BackColor == libbyColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        horcount++;
                     }
                     else
                     {
@@ -444,59 +448,25 @@ namespace ConnectFour_Group6
                 {
                     if (col + i < 7 && gameBoard.getGameBoard()[row, col + i].getButton().BackColor == libbyColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        horcount++;
                     }
                     else
                     {
                         break;
                     }
                 }
-                //diag left
-                for (int i = 1; i < 4; i++)
+                if (horcount == 4)
                 {
-                    if (row + i < 6 && col - i >= 0 && gameBoard.getGameBoard()[row + i, col - i].getButton().BackColor == libbyColor)
-                    {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    Debug.WriteLine("Read Test Successful");
+                    return true;
                 }
-                //diag right
+
+                //diag up right
                 for (int i = 1; i < 4; i++)
                 {
                     if (row + i < 6 && col + i < 7 && gameBoard.getGameBoard()[row + i, col + i].getButton().BackColor == libbyColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                //diag down right
-                for (int i = 1; i < 4; i++)
-                {
-                    if (row - i >= 0 && col + i < 7 && gameBoard.getGameBoard()[row - i, col + i].getButton().BackColor == libbyColor)
-                    {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        diagrightcount++;
                     }
                     else
                     {
@@ -508,17 +478,48 @@ namespace ConnectFour_Group6
                 {
                     if (row - i >= 0 && col - i >= 0 && gameBoard.getGameBoard()[row - i, col - i].getButton().BackColor == libbyColor)
                     {
-                        if (i == 3)
-                        {
-                            Debug.WriteLine("Read Test Success");
-                            return true;
-                        }
+                        diagrightcount++;
                     }
                     else
                     {
                         break;
                     }
                 }
+                if (diagrightcount == 4)
+                {
+                    Debug.WriteLine("Read Test Successful");
+                    return true;
+                }
+                //diag up left
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row + i < 6 && col - i >= 0 && gameBoard.getGameBoard()[row + i, col - i].getButton().BackColor == libbyColor)
+                    {
+                        diagleftcount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                //diag down right
+                for (int i = 1; i < 4; i++)
+                {
+                    if (row - i >= 0 && col + i < 7 && gameBoard.getGameBoard()[row - i, col + i].getButton().BackColor == libbyColor)
+                    {
+                        diagleftcount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (diagleftcount == 4)
+                {
+                    Debug.WriteLine("Read Test Successful");
+                    return true;
+                }
+
                 return false;
             }
             else { return false; }
