@@ -540,7 +540,7 @@
             WarningRtb.ReadOnly = true;
             WarningRtb.Size = new Size(100, 77);
             WarningRtb.TabIndex = 56;
-            WarningRtb.Text = "Warning, large numbers might crash the program. The default depth is 5";
+            WarningRtb.Text = "Warning, large numbers might crash the program. The default depth is 7";
             WarningRtb.TextChanged += WarningRtb_TextChanged;
             // 
             // Iterations_Lbl
@@ -614,6 +614,8 @@
             Controls.Add(Cell_4_6);
             Name = "MainGame";
             Text = "MainGame";
+            FormClosed += MainGame_FormClosed;
+            Load += MainGame_Load;
             ResumeLayout(false);
             PerformLayout();
         }

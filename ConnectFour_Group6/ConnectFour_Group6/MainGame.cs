@@ -153,21 +153,20 @@ namespace ConnectFour_Group6
                         depth = Int32.Parse(Depth_box.Text);
                         if (depth <= 0)
                         {
-                            depth = 5;
+                            depth = 7;
                         }
                     }
                     else
                     {
-                        depth = 5;
+                        depth = 7;
                     }
-
+                    Debug.WriteLine("Depth: " + depth);
                     column = stacy.initialBoard(gameBoard, depth);
 
                     gameBoard.placePiece(column);
 
                     if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                     {
-                        Debug.WriteLine("Checking win");
                         saver.updateFile(2, depth);
                         displayWinState(true, 2);
                     }
@@ -529,6 +528,16 @@ namespace ConnectFour_Group6
         private void WarningRtb_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void MainGame_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainGame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(1);
         }
     }
 

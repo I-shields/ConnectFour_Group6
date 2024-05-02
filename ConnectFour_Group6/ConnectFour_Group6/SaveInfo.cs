@@ -147,9 +147,9 @@ namespace ConnectFour_Group6
                     writer.Write(",");
                     writer.Write(stat[4]);
                     writer.Write("\n");
-                    writer.Close();
 
                 }
+                writer.Close();
             }
         }
     }

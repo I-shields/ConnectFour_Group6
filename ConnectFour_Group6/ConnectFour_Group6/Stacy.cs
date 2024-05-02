@@ -121,8 +121,12 @@ namespace ConnectFour_Group6
                 }
             }
 
-            column = buildNext(boardArray, depth);
-            return column;
+            int alpha = int.MinValue;
+            int beta = int.MaxValue;
+            // the depth is the number passed to the function
+            int[] result = backToTheFuture(boardArray, depth, alpha, beta, true);
+            int move = result[0];
+            return move;
         }
 
         public int scores(List<rowInfo> list)
@@ -182,22 +186,9 @@ namespace ConnectFour_Group6
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            depth = 6;
             // the depth is the number passed to the function
-            int[] result = backToTheFuture(gameBoard, 8, alpha, beta, true);
+            int[] result = backToTheFuture(gameBoard, depth, alpha, beta, true);
             int move = result[0];
-            Debug.WriteLine("Iterations: " + iter);
-            if (move == -1)
-            {
-                foreach (Cell cell in gameBoard)
-                {
-                    if (cell.getPlayer() == 0)
-                    {
-                        move = cell.getCol();
-                        break;
-                    }
-                }
-            }
             return move;
 
         }
@@ -769,52 +760,53 @@ namespace ConnectFour_Group6
         public int[] backToTheFuture(Cell[,] b, int depth, int alpha, int beta, bool maximizingPlayer)
         {
             int[] infoReturn;
-            bool end = isEnd(b);
-            if (depth == 0 || end)
+            if(depth == 0 || isEnd(b) || checkWins(b, 1) || checkWins(b, 2))
             {
-                iter++;
-                if (end)
+                if(depth == 0)
                 {
-                    bool aiWin = checkWins(b, 2);
-                    if (aiWin)
-                    {
-                        infoReturn = new int[2];
-                        infoReturn[0] = 0;
-                        infoReturn[1] = int.MaxValue;
-                        return infoReturn;
-                    }
-
-                    if (!aiWin)
-                    {
-                        infoReturn = new int[2];
-                        infoReturn[0] = 0;
-                        infoReturn[1] = int.MinValue;
-                        return infoReturn;
-                    }
-                    else
-                    {
-                        infoReturn = new int[2];
-                        infoReturn[0] = 0;
-                        infoReturn[1] = int.MinValue;
-                        return infoReturn;
-                    }
-                }
-                else
-                {
-                    if (maximizingPlayer)
-                    {
-                        infoReturn = new int[2];
-                        infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[0];
-                        return infoReturn;
-                    }
-                    else
+                    if(maximizingPlayer)
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
                         infoReturn[1] = getScores(b)[1];
                         return infoReturn;
                     }
+                    if(!maximizingPlayer)
+                    {
+                        infoReturn = new int[2];
+                        infoReturn[0] = 0;
+                        infoReturn[1] = getScores(b)[0];
+                        return infoReturn;
+                    }
+                }
+
+                if(isEnd(b))
+                {
+                    infoReturn = new int[2];
+                    infoReturn[0] = 0;
+                    infoReturn[1] = int.MinValue;
+                    return infoReturn;
+                }
+                if(checkWins(b, 1))
+                {
+                    infoReturn = new int[2];
+                    infoReturn[0] = 0;
+                    infoReturn[1] = int.MinValue;
+                    return infoReturn;
+                }
+                if(checkWins(b, 2))
+                {
+                    infoReturn = new int[2];
+                    infoReturn[0] = 0;
+                    infoReturn[1] = int.MaxValue;
+                    return infoReturn;
+                }
+                else
+                {
+                    infoReturn = new int[2];
+                    infoReturn[0] = 0;
+                    infoReturn[1] = getScores(b)[1];
+                    return infoReturn;
                 }
             }
             else
@@ -827,7 +819,7 @@ namespace ConnectFour_Group6
                     int maxEval = int.MinValue;
                     int newScore;
                     int lr;
-                    int bestMove = -1;
+                    int bestMove = 0;
 
                     for (int i = 0; i < 7; i++)
                     {
@@ -859,7 +851,7 @@ namespace ConnectFour_Group6
                 else
                 {
                     int minEval = int.MaxValue;
-                    int bestMove2 = -1;
+                    int bestMove2 = 0;
                     int lr;
                     int newScore2;
                     for (int i = 0; i < 7; i++)
@@ -904,14 +896,7 @@ namespace ConnectFour_Group6
                     break;
                 }
             }
-            if (BoardFilled || checkWins(b, 1) || checkWins(b, 2))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return BoardFilled;
         }
     }
 }

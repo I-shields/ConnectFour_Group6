@@ -136,7 +136,6 @@ namespace ConnectFour_Group6
         public void placePiece(int c)
         {
             int lr = getLowestRow(c);
-            Debug.WriteLine("Lowest row is: " + lr);
             if (playerTurn && checkPos(lr, c))
             {
                 curcell = gameBoard[lr, c];
