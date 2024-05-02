@@ -101,7 +101,6 @@ namespace ConnectFour_Group6
 
         public int initialBoard(Board b, int depth)
         {
-            int column;
             Color aiColor = Color.Yellow;
             Color playerColor = Color.Red;
             Cell[,] boardArray;
@@ -760,53 +759,51 @@ namespace ConnectFour_Group6
         public int[] backToTheFuture(Cell[,] b, int depth, int alpha, int beta, bool maximizingPlayer)
         {
             int[] infoReturn;
-            if(depth == 0 || isEnd(b) || checkWins(b, 1) || checkWins(b, 2))
+            bool end = isEnd(b);
+            if (depth == 0 || end)
             {
-                if(depth == 0)
+                iter++;
+                if (end)
                 {
-                    if(maximizingPlayer)
+                    bool aiWin = checkWins(b, 2);
+                    if (aiWin)
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[1];
+                        infoReturn[1] = int.MaxValue;
                         return infoReturn;
                     }
-                    if(!maximizingPlayer)
+                    if (!aiWin)
+                    {
+                        infoReturn = new int[2];
+                        infoReturn[0] = 0;
+                        infoReturn[1] = int.MinValue;
+                        return infoReturn;
+                    }
+                    else
+                    {
+                        infoReturn = new int[2];
+                        infoReturn[0] = 0;
+                        infoReturn[1] = int.MinValue;
+                        return infoReturn;
+                    }
+                }
+                else
+                {
+                    if (maximizingPlayer)
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
                         infoReturn[1] = getScores(b)[0];
                         return infoReturn;
                     }
-                }
-
-                if(isEnd(b))
-                {
-                    infoReturn = new int[2];
-                    infoReturn[0] = 0;
-                    infoReturn[1] = int.MinValue;
-                    return infoReturn;
-                }
-                if(checkWins(b, 1))
-                {
-                    infoReturn = new int[2];
-                    infoReturn[0] = 0;
-                    infoReturn[1] = int.MinValue;
-                    return infoReturn;
-                }
-                if(checkWins(b, 2))
-                {
-                    infoReturn = new int[2];
-                    infoReturn[0] = 0;
-                    infoReturn[1] = int.MaxValue;
-                    return infoReturn;
-                }
-                else
-                {
-                    infoReturn = new int[2];
-                    infoReturn[0] = 0;
-                    infoReturn[1] = getScores(b)[1];
-                    return infoReturn;
+                    else
+                    {
+                        infoReturn = new int[2];
+                        infoReturn[0] = 0;
+                        infoReturn[1] = getScores(b)[1];
+                        return infoReturn;
+                    }
                 }
             }
             else
@@ -841,6 +838,10 @@ namespace ConnectFour_Group6
                             }
                             gameBoard = rebuildBoard(b);
                         }
+                        else
+                        {
+                            continue;
+                        }
                     }
                     infoReturn = new int[2];
                     infoReturn[0] = bestMove;
@@ -874,6 +875,10 @@ namespace ConnectFour_Group6
                             }
                             gameBoard = rebuildBoard(b);
                         }
+                        else
+                        { 
+                            continue; 
+                        }
                     }
                     infoReturn = new int[2];
                     infoReturn[0] = bestMove2;
@@ -887,16 +892,26 @@ namespace ConnectFour_Group6
 
         public bool isEnd(Cell[,] b)
         {
-            bool BoardFilled = true;
+            if(checkWins(b,1))
+            {
+                return true;
+            }
+
+            if(checkWins(b,2))
+            { 
+                return true; 
+            }
+
             foreach (Cell cell in b)
             {
                 if (cell.getPlayer() == 0)
                 {
-                    BoardFilled = false;
-                    break;
+                    return false;
                 }
             }
-            return BoardFilled;
+
+            return false;
+
         }
     }
 }

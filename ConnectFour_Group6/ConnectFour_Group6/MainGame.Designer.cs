@@ -613,6 +613,7 @@
             Controls.Add(Cell_3_6);
             Controls.Add(Cell_4_6);
             Name = "MainGame";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "MainGame";
             FormClosed += MainGame_FormClosed;
             Load += MainGame_Load;

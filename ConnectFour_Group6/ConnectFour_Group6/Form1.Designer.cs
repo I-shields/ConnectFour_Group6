@@ -60,6 +60,7 @@
             Controls.Add(btn_pvp);
             Controls.Add(StartAI);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             ResumeLayout(false);
         }
