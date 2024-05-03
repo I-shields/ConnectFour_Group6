@@ -30,6 +30,7 @@
         {
             StartAI = new Button();
             btn_pvp = new Button();
+            ShowStats_Btn = new Button();
             SuspendLayout();
             // 
             // StartAI
@@ -52,16 +53,28 @@
             btn_pvp.UseVisualStyleBackColor = true;
             btn_pvp.Click += btn_pvp_Click;
             // 
+            // ShowStats_Btn
+            // 
+            ShowStats_Btn.Location = new Point(285, 308);
+            ShowStats_Btn.Name = "ShowStats_Btn";
+            ShowStats_Btn.Size = new Size(171, 23);
+            ShowStats_Btn.TabIndex = 2;
+            ShowStats_Btn.Text = "View stats";
+            ShowStats_Btn.UseVisualStyleBackColor = true;
+            ShowStats_Btn.Click += ShowStats_Btn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 517);
+            Controls.Add(ShowStats_Btn);
             Controls.Add(btn_pvp);
             Controls.Add(StartAI);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            FormClosed += Form1_FormClosed;
             ResumeLayout(false);
         }
 
@@ -69,5 +82,6 @@
 
         private Button StartAI;
         private Button btn_pvp;
+        private Button ShowStats_Btn;
     }
 }

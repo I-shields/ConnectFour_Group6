@@ -74,12 +74,6 @@ namespace ConnectFour_Group6
             public int endRow;
         }
 
-        public class searchData
-        {
-            public int value;
-            public int move;
-        }
-
 
         public int startStacy(Board b)
         {
@@ -101,8 +95,6 @@ namespace ConnectFour_Group6
 
         public int initialBoard(Board b, int depth)
         {
-            Color aiColor = Color.Yellow;
-            Color playerColor = Color.Red;
             Cell[,] boardArray;
             boardArray = new Cell[6, 7];
 
@@ -122,9 +114,13 @@ namespace ConnectFour_Group6
 
             int alpha = int.MinValue;
             int beta = int.MaxValue;
-            // the depth is the number passed to the function
             int[] result = backToTheFuture(boardArray, depth, alpha, beta, true);
             int move = result[0];
+            if(move == 0)
+            {
+                Debug.Write("0 returned");
+
+            }
             return move;
         }
 
@@ -167,32 +163,19 @@ namespace ConnectFour_Group6
             {
 
                 length = info.endRow - info.startRow;
-                if (length > 0)
+                if (length != 0)
                 {
+                    if(length < 0)
+                    {
+                        length = length * -1;
+                    }
                     score += (length + 1) * 2;
                 }
             }
             return score;
         }
 
-        private int buildNext(Cell[,] b, int depth)
-        {
-            Cell[,] gameBoard;
-
-            gameBoard = new Cell[6, 7];
-
-            gameBoard = rebuildBoard(b);
-
-            int alpha = int.MinValue;
-            int beta = int.MaxValue;
-            // the depth is the number passed to the function
-            int[] result = backToTheFuture(gameBoard, depth, alpha, beta, true);
-            int move = result[0];
-            return move;
-
-        }
-
-        private int[,] buildValues()
+        public int[,] buildValues()
         {
             int[,] boardValues = new int[6, 7];
             int[] row = { 5, 10, 15, 20, 15, 10, 5, 4, 8, 13, 18, 13, 8, 4, 3, 6, 11, 16, 11, 6, 3, 2, 4, 9, 14, 9, 4, 2, 1, 2, 7, 12, 7, 2, 1, 1, 1, 5, 10, 5, 1, 1 };
@@ -300,8 +283,6 @@ namespace ConnectFour_Group6
 
         public List<rowInfo> GetRows(Cell[,] b, int player)
         {
-            Color aiColor = Color.Yellow;
-            Color playerColor = Color.Red;
             List<rowInfo> aiRowList = new List<rowInfo>();
             List<rowInfo> playerRowList = new List<rowInfo>();
 
@@ -511,8 +492,6 @@ namespace ConnectFour_Group6
 
         public List<diaInfo> getReverseDia(Cell[,] b, int player)
         {
-            Color aiColor = Color.Yellow;
-            Color playerColor = Color.Red;
             List<diaInfo> reverseAiDia = new List<diaInfo>();
             List<diaInfo> reversePlayerDia = new List<diaInfo>();
             bool inList = false;
@@ -546,11 +525,10 @@ namespace ConnectFour_Group6
 
                             foreach (diaInfo info in reversePlayerDia)
                             {
-                                int diaInList = info.endColumn - info.startColumn;
-                                int newDia = di.endColumn - info.startColumn;
                                 if (di.startColumn == info.startColumn || di.endColumn == info.endColumn)
                                 {
                                     inList = true;
+                                    break;
                                 }
                             }
 
@@ -602,6 +580,7 @@ namespace ConnectFour_Group6
                                 if (di.startColumn == info.startColumn || di.endColumn == info.endColumn)
                                 {
                                     inList = true;
+                                    break;
                                 }
                             }
 
@@ -696,8 +675,6 @@ namespace ConnectFour_Group6
             int[] scoreset;
             int[,] boardValues = new int[6, 7];
             boardValues = buildValues();
-            Color aiColor = Color.Yellow;
-            Color playerColor = Color.Red;
             List<colInfo> aiColList = new List<colInfo>();
             List<colInfo> playerColList = new List<colInfo>();
 
@@ -707,19 +684,23 @@ namespace ConnectFour_Group6
             List<diaInfo> aiDiaList = new List<diaInfo>();
             List<diaInfo> playerDiaList = new List<diaInfo>();
 
-            aiColList = GetCols(b, 2);
+            aiColList = GetCols(b, 0);
             playerColList = GetCols(b, 1);
 
-            aiRowList = GetRows(b, 2);
+            aiRowList = GetRows(b, 0);
             playerRowList = GetRows(b, 1);
 
-            aiDiaList = getDia(b, 2);
+            aiDiaList = getDia(b, 0);
             playerDiaList = getDia(b, 1);
 
             int playerScore = 0;
             int aiScore = 0;
-            playerScore += scores(playerColList) + scores(playerRowList) + scores(playerDiaList);
-            aiScore += scores(aiColList) + scores(aiRowList) + scores(aiDiaList);
+            playerScore += scores(playerColList);
+            playerScore += scores(playerRowList);
+            playerScore += scores(playerDiaList);
+            aiScore += scores(aiColList);
+            aiScore += scores(aiRowList);
+            aiScore += scores(aiDiaList);
 
             foreach (Cell cell in b)
             {
@@ -759,32 +740,30 @@ namespace ConnectFour_Group6
         public int[] backToTheFuture(Cell[,] b, int depth, int alpha, int beta, bool maximizingPlayer)
         {
             int[] infoReturn;
-            bool end = isEnd(b);
-            if (depth == 0 || end)
+            if (depth == 0 || isEnd(b))
             {
                 iter++;
-                if (end)
+                if (isEnd(b))
                 {
-                    bool aiWin = checkWins(b, 2);
-                    if (aiWin)
+                    if (checkWins(b, 2))
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = int.MaxValue;
+                        infoReturn[1] = int.MaxValue-1;
                         return infoReturn;
                     }
-                    if (!aiWin)
+                    if (checkWins(b, 1))
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = int.MinValue;
+                        infoReturn[1] = int.MinValue+1;
                         return infoReturn;
                     }
                     else
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = int.MinValue;
+                        infoReturn[1] = int.MinValue+2;
                         return infoReturn;
                     }
                 }
@@ -794,14 +773,14 @@ namespace ConnectFour_Group6
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[0];
+                        infoReturn[1] = getScores(b)[1];
                         return infoReturn;
                     }
                     else
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[1];
+                        infoReturn[1] = getScores(b)[0];
                         return infoReturn;
                     }
                 }
@@ -809,10 +788,11 @@ namespace ConnectFour_Group6
             else
             {
                 Cell[,] gameBoard;
-                gameBoard = new Cell[6, 7];
-                gameBoard = rebuildBoard(b);
+
                 if (maximizingPlayer)
                 {
+                    gameBoard = new Cell[6, 7];
+                    gameBoard = rebuildBoard(b);
                     int maxEval = int.MinValue;
                     int newScore;
                     int lr;
@@ -838,10 +818,6 @@ namespace ConnectFour_Group6
                             }
                             gameBoard = rebuildBoard(b);
                         }
-                        else
-                        {
-                            continue;
-                        }
                     }
                     infoReturn = new int[2];
                     infoReturn[0] = bestMove;
@@ -851,6 +827,8 @@ namespace ConnectFour_Group6
 
                 else
                 {
+                    gameBoard = new Cell[6, 7];
+                    gameBoard = rebuildBoard(b);
                     int minEval = int.MaxValue;
                     int bestMove2 = 0;
                     int lr;
@@ -875,10 +853,7 @@ namespace ConnectFour_Group6
                             }
                             gameBoard = rebuildBoard(b);
                         }
-                        else
-                        { 
-                            continue; 
-                        }
+
                     }
                     infoReturn = new int[2];
                     infoReturn[0] = bestMove2;

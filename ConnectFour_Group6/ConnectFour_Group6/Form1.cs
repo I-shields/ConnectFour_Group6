@@ -65,5 +65,17 @@ namespace ConnectFour_Group6
         {
             return prevgame;
         }
+
+        private void ShowStats_Btn_Click(object sender, EventArgs e)
+        {
+            statsForm sf = new statsForm();
+            this.Hide();
+            sf.Show();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(1);
+        }
     }
 }

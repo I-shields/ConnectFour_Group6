@@ -67,7 +67,7 @@ namespace ConnectFour_Group6
                 {
                     stats = new int[5];
                     stats[0] = d;
-                    stats[1] = 0;
+                    stats[1] = 1;
                     if (update == 0)
                     {
                         stats[4] = 1;
