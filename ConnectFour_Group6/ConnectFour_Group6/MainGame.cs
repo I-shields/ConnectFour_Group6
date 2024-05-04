@@ -149,7 +149,7 @@ namespace ConnectFour_Group6
                     }
                     displayWinState(true, 1);
                 }
-                else
+                else if (!checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                 {
                     displayTieState();
                 }
@@ -180,7 +180,7 @@ namespace ConnectFour_Group6
                         saver.updateFile(2, depth);
                         displayWinState(true, 2);
                     }
-                    else
+                    else if (!checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                     {
                         displayTieState();
                     }
@@ -216,7 +216,7 @@ namespace ConnectFour_Group6
                 {
                     displayWinState(true, 2);
                 }
-                else
+                else if (!checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                 {
                     displayTieState();
                 }
