@@ -100,6 +100,7 @@
             // 
             // depthBox
             // 
+            depthBox.BorderStyle = BorderStyle.None;
             depthBox.Location = new Point(12, 27);
             depthBox.Name = "depthBox";
             depthBox.ReadOnly = true;
@@ -109,6 +110,7 @@
             // 
             // gamesPlayedBox
             // 
+            gamesPlayedBox.BorderStyle = BorderStyle.None;
             gamesPlayedBox.Location = new Point(118, 27);
             gamesPlayedBox.Name = "gamesPlayedBox";
             gamesPlayedBox.ReadOnly = true;
@@ -118,6 +120,7 @@
             // 
             // AiWinsBox
             // 
+            AiWinsBox.BorderStyle = BorderStyle.None;
             AiWinsBox.Location = new Point(224, 27);
             AiWinsBox.Name = "AiWinsBox";
             AiWinsBox.ReadOnly = true;
@@ -127,6 +130,7 @@
             // 
             // plWinsBox
             // 
+            plWinsBox.BorderStyle = BorderStyle.None;
             plWinsBox.Location = new Point(330, 27);
             plWinsBox.Name = "plWinsBox";
             plWinsBox.ReadOnly = true;
@@ -136,6 +140,7 @@
             // 
             // tiesBox
             // 
+            tiesBox.BorderStyle = BorderStyle.None;
             tiesBox.Location = new Point(436, 27);
             tiesBox.Name = "tiesBox";
             tiesBox.ReadOnly = true;
@@ -145,6 +150,7 @@
             // 
             // aiWinPerBox
             // 
+            aiWinPerBox.BorderStyle = BorderStyle.None;
             aiWinPerBox.Location = new Point(542, 27);
             aiWinPerBox.Name = "aiWinPerBox";
             aiWinPerBox.ReadOnly = true;
@@ -166,7 +172,7 @@
             // Win_Lbl
             // 
             Win_Lbl.AutoSize = true;
-            Win_Lbl.Location = new Point(648, 239);
+            Win_Lbl.Location = new Point(648, 334);
             Win_Lbl.Name = "Win_Lbl";
             Win_Lbl.Size = new Size(126, 15);
             Win_Lbl.TabIndex = 13;
@@ -193,6 +199,7 @@
             Controls.Add(GamesPlayed_Lbl);
             Controls.Add(Depth_Lbl);
             Name = "statsForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "statsForm";
             FormClosed += statsForm_FormClosed;
             ResumeLayout(false);

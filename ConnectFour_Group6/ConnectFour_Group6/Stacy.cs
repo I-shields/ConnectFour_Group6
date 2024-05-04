@@ -16,28 +16,6 @@ namespace ConnectFour_Group6
         //find the best outcome
         //play move
 
-        //====BEST====
-        // Win game - 10
-        // Unbeatable move - 7
-
-        //====GOOD====
-        // Single piece - 1
-        // AI 2 in a row - 4
-        // AI 3 in a row - 6
-        // Block player - 5
-        // Block a win - 7
-
-        //=====Bad=====
-        // Single piece - (-1)
-        // Player 2 in a row - (-4)
-        // Player 3 in a row - (-6)
-        // Player blocks AI - (-5)
-        // Block AI win - (-7)
-
-        //====WORSE====
-        // Player Wins - (-10)
-        // Player unbeatable move - (-7)
-
         public int iter = 0;
 
         public struct colInfo
@@ -78,7 +56,6 @@ namespace ConnectFour_Group6
         public int startStacy(Board b)
         {
             int column = 0;
-            //column = initialBoard(b);
 
             return column;
         }
@@ -116,11 +93,6 @@ namespace ConnectFour_Group6
             int beta = int.MaxValue;
             int[] result = backToTheFuture(boardArray, depth, alpha, beta, true);
             int move = result[0];
-            if(move == 0)
-            {
-                Debug.Write("0 returned");
-
-            }
             return move;
         }
 

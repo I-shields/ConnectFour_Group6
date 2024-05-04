@@ -25,6 +25,7 @@ namespace ConnectFour_Group6
         Color playerPreview = Color.FromArgb(50, 255, 0, 0);
 
         //====AI IS KNOWN AS LIBBY!!====
+        //====AI updated to stacy====
         Color libbyColor = Color.Yellow;
         Color libbyPreviw = Color.FromArgb(50, 255, 222, 0);
 
