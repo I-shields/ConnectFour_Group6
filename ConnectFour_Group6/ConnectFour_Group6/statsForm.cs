@@ -36,22 +36,22 @@ namespace ConnectFour_Group6
                 aiWinPerBox.Text += "===========" + "\n";
             }
 
-            if(p == 1)
+            if (p == 1)
             {
                 Win_Lbl.Text = "Player 1 wins!";
                 Win_Lbl.Visible = true;
             }
-            else if(p == 2)
+            else if (p == 2)
             {
                 Win_Lbl.Text = "AI wins";
                 Win_Lbl.Visible = true;
             }
-            else if(p == 3)
+            else if (p == 3)
             {
                 Win_Lbl.Text = "Player 2 wins!";
                 Win_Lbl.Visible = true;
             }
-            else if(p == 4)
+            else if (p == 4)
             {
                 Win_Lbl.Text = "It's a tie";
                 Win_Lbl.Visible = true;

@@ -149,6 +149,10 @@ namespace ConnectFour_Group6
                     }
                     displayWinState(true, 1);
                 }
+                else
+                {
+                    displayTieState();
+                }
                 //if it's player vs AI, run the AI
                 if (mode == 1)
                 {
@@ -175,6 +179,10 @@ namespace ConnectFour_Group6
                     {
                         saver.updateFile(2, depth);
                         displayWinState(true, 2);
+                    }
+                    else
+                    {
+                        displayTieState();
                     }
                     string numsofboards = String.Format($"{stacy.getIter():n0}");
                     Iterations_Lbl.Text = ("Boards evaluated by AI: " + numsofboards);
@@ -207,6 +215,10 @@ namespace ConnectFour_Group6
                 if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                 {
                     displayWinState(true, 2);
+                }
+                else
+                {
+                    displayTieState();
                 }
             }
 
@@ -310,6 +322,85 @@ namespace ConnectFour_Group6
                 }
             }
             //add something here for the robot as well
+        }
+
+        public void displayTieState()
+        {
+            if (checkFilled())
+            {
+                statsForm sf = new statsForm(4);
+                lbl_winText.Text = "Tie!";
+                lbl_winText.Visible = true;
+                gameBoard.setPlayerTurn(false);
+                gameBoard.setPlayerTwoTurn(false);
+                sf.Show();
+                this.Hide();
+            }
+        }
+
+        public bool checkFilled()
+        {
+            Color playerColor = Color.Red;
+            Color libbyColor = Color.Yellow;
+            int filledCells = 0;
+            const int rows = 6;
+            const int cols = 7;
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (gameBoard.getGameBoard()[row, col].getButton().BackColor == playerColor ||
+                        gameBoard.getGameBoard()[row, col].getButton().BackColor == libbyColor)
+                    {
+                        filledCells++;
+                    }
+                }
+            }
+
+            if (filledCells==42)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            //Color playerColor = Color.Red;
+            //Color libbyColor = Color.Yellow;
+            //int col;
+            //int filledCells = 0;
+            //for (int row = 0; row < 6; row++)
+            //{
+            //    for (col=0; col < 7; col++)
+            //    {
+            //        if (gameBoard.getGameBoard()[row, col].getButton().BackColor == playerColor || gameBoard.getGameBoard()[row, col].getButton().BackColor == libbyColor)
+            //        {
+            //            filledCells++;
+            //            col++;
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
+            //    if (col==7)
+            //    {
+            //        col = 0;
+            //        row++;
+            //    }
+            //    else
+            //    {
+            //        break;
+            //    }
+            //}
+            //if (filledCells == 42)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
 
 
