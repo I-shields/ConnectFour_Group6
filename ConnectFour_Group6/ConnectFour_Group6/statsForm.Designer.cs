@@ -41,6 +41,7 @@
             tiesBox = new RichTextBox();
             aiWinPerBox = new RichTextBox();
             Return_btn = new Button();
+            Win_Lbl = new Label();
             SuspendLayout();
             // 
             // Depth_Lbl
@@ -162,11 +163,22 @@
             Return_btn.UseVisualStyleBackColor = true;
             Return_btn.Click += Return_btn_Click;
             // 
+            // Win_Lbl
+            // 
+            Win_Lbl.AutoSize = true;
+            Win_Lbl.Location = new Point(648, 239);
+            Win_Lbl.Name = "Win_Lbl";
+            Win_Lbl.Size = new Size(126, 15);
+            Win_Lbl.TabIndex = 13;
+            Win_Lbl.Text = "Who won place holder";
+            Win_Lbl.Visible = false;
+            // 
             // statsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Win_Lbl);
             Controls.Add(Return_btn);
             Controls.Add(aiWinPerBox);
             Controls.Add(tiesBox);
@@ -202,5 +214,6 @@
         private RichTextBox tiesBox;
         private RichTextBox aiWinPerBox;
         private Button Return_btn;
+        private Label Win_Lbl;
     }
 }

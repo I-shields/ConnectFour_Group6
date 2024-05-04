@@ -68,7 +68,7 @@ namespace ConnectFour_Group6
 
         private void ShowStats_Btn_Click(object sender, EventArgs e)
         {
-            statsForm sf = new statsForm();
+            statsForm sf = new statsForm(0);
             this.Hide();
             sf.Show();
         }

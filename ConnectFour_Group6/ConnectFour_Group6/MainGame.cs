@@ -60,9 +60,15 @@ namespace ConnectFour_Group6
             }
             if (selector == 2)
             {
+
+                Depth_box.Visible = false;
+                WarningRtb.Visible = false;
+                Depth_Lbl.Visible = false;
+                Depth_box.Visible = false;
                 mode = 2;
                 gameBoard = new Board(mode);
                 setUpGame();
+
                 Column1.MouseDown += placePiece;
                 Column2.MouseDown += placePiece;
                 Column3.MouseDown += placePiece;
@@ -264,32 +270,43 @@ namespace ConnectFour_Group6
 
         public void displayWinState(bool b, int player)
         {
+            
             if (b == true)
             {
                 if (player == 1)
                 {
+                    statsForm sf = new statsForm(1);
                     lbl_winText.Text = "Player 1 wins!";
                     lbl_winText.Visible = true;
                     gameBoard.setPlayerTurn(false);
                     gameBoard.setPlayerTwoTurn(false);
+                    sf.Show();
+                    this.Hide();
                 }
                 else if (player == 2)
                 {
                     if (mode == 1)
                     {
+                        statsForm sf = new statsForm(2);
                         lbl_winText.Text = "AI wins";
                         lbl_winText.Visible = true;
                         gameBoard.setPlayerTurn(false);
                         gameBoard.setPlayerTwoTurn(false);
+                        sf.Show();
+                        this.Hide();
                     }
                     else
                     {
+                        statsForm sf = new statsForm(3);
                         lbl_winText.Text = "Player 2 wins!";
                         lbl_winText.Visible = true;
                         gameBoard.setPlayerTurn(false);
                         gameBoard.setPlayerTwoTurn(false);
+                        sf.Show();
+                        this.Hide();
                     }
                     
+                    this.Hide();
                 }
             }
             //add something here for the robot as well

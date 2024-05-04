@@ -13,7 +13,7 @@ namespace ConnectFour_Group6
     public partial class statsForm : Form
     {
         private SaveInfo si;
-        public statsForm()
+        public statsForm(int p)
         {
             si = new SaveInfo();
             InitializeComponent();
@@ -34,6 +34,27 @@ namespace ConnectFour_Group6
                 plWinsBox.Text += "===========" + "\n";
                 tiesBox.Text += "===========" + "\n";
                 aiWinPerBox.Text += "===========" + "\n";
+            }
+
+            if(p == 1)
+            {
+                Win_Lbl.Text = "Player 1 wins!";
+                Win_Lbl.Visible = true;
+            }
+            else if(p == 2)
+            {
+                Win_Lbl.Text = "AI wins";
+                Win_Lbl.Visible = true;
+            }
+            else if(p == 3)
+            {
+                Win_Lbl.Text = "Player 2 wins!";
+                Win_Lbl.Visible = true;
+            }
+            else if(p == 4)
+            {
+                Win_Lbl.Text = "It's a tie";
+                Win_Lbl.Visible = true;
             }
         }
 
