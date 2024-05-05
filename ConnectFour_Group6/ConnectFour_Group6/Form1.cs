@@ -8,8 +8,8 @@ namespace ConnectFour_Group6
     public partial class Form1 : Form
     //required variables
     {
-        private MainGame prevgame = new MainGame();
-        MainGame curgame;
+        private MainGame prevgame;
+        private MainGame curgame;
         public Form1()
         {
             InitializeComponent();
@@ -72,7 +72,7 @@ namespace ConnectFour_Group6
         private void ShowStats_Btn_Click(object sender, EventArgs e)
         {
             //start the stats
-            statsForm sf = new statsForm(5);
+            statsForm sf = new statsForm(5, this);
             sf.Show();
             this.Hide();
         }

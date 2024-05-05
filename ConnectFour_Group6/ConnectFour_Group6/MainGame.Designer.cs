@@ -514,9 +514,10 @@
             // lbl_winText
             // 
             lbl_winText.AutoSize = true;
+            lbl_winText.Font = new Font("Tw Cen MT Condensed Extra Bold", 20F, FontStyle.Italic);
             lbl_winText.Location = new Point(499, 86);
             lbl_winText.Name = "lbl_winText";
-            lbl_winText.Size = new Size(117, 15);
+            lbl_winText.Size = new Size(228, 32);
             lbl_winText.TabIndex = 52;
             lbl_winText.Text = "Win Text Placeholder";
             lbl_winText.Visible = false;
@@ -569,7 +570,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(213, 146, 55);
+            panel1.BackColor = Color.Blue;
             panel1.Location = new Point(49, 68);
             panel1.Name = "panel1";
             panel1.Size = new Size(396, 338);
@@ -577,7 +578,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.Lime;
+            panel2.BackColor = Color.Blue;
             panel2.Location = new Point(49, 4);
             panel2.Name = "panel2";
             panel2.Size = new Size(396, 66);
@@ -587,7 +588,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(0, 64, 0);
+            BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(800, 450);
             Controls.Add(btn_return);
             Controls.Add(Iterations_Lbl);

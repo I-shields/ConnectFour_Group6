@@ -32,6 +32,8 @@
             btn_pvp = new Button();
             ShowStats_Btn = new Button();
             Exit_Btn = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // StartAI
@@ -74,6 +76,16 @@
             Exit_Btn.UseVisualStyleBackColor = true;
             Exit_Btn.Click += Exit_Btn_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.R;
+            pictureBox1.Location = new Point(160, 114);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(433, 129);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -81,6 +93,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(800, 517);
+            Controls.Add(pictureBox1);
             Controls.Add(Exit_Btn);
             Controls.Add(ShowStats_Btn);
             Controls.Add(btn_pvp);
@@ -91,7 +104,9 @@
             Text = "Main Menu";
             TransparencyKey = Color.Black;
             FormClosed += Form1_FormClosed;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -100,5 +115,6 @@
         private Button btn_pvp;
         private Button ShowStats_Btn;
         private Button Exit_Btn;
+        private PictureBox pictureBox1;
     }
 }

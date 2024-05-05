@@ -19,8 +19,10 @@ namespace ConnectFour_Group6
     public partial class statsForm : Form
     {
         private SaveInfo si;
-        public statsForm(int p)
+        private Form1 form1;
+        public statsForm(int p, Form1 form)
         {
+            form1 = form;
             //display the info saved in the text file
             si = new SaveInfo();
             InitializeComponent();
@@ -63,6 +65,7 @@ namespace ConnectFour_Group6
                 Win_Lbl.Text = "It's a tie";
                 Win_Lbl.Visible = true;
             }
+
         }
 
         private void AiWinP_Lbl_Click(object sender, EventArgs e)
@@ -82,9 +85,8 @@ namespace ConnectFour_Group6
 
         private void Return_btn_Click(object sender, EventArgs e)
         {
-            Form1 mf = new Form1();
-            mf.Show();
             this.Hide();
+            form1.Show();
         }
 
         private void newGame_Btn_Click(object sender, EventArgs e)

@@ -172,9 +172,10 @@
             // Win_Lbl
             // 
             Win_Lbl.AutoSize = true;
-            Win_Lbl.Location = new Point(648, 397);
+            Win_Lbl.Font = new Font("Tw Cen MT Condensed Extra Bold", 12F, FontStyle.Italic);
+            Win_Lbl.Location = new Point(648, 392);
             Win_Lbl.Name = "Win_Lbl";
-            Win_Lbl.Size = new Size(126, 15);
+            Win_Lbl.Size = new Size(145, 20);
             Win_Lbl.TabIndex = 13;
             Win_Lbl.Text = "Who won place holder";
             Win_Lbl.Visible = false;
@@ -184,6 +185,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(800, 450);
             Controls.Add(Win_Lbl);
             Controls.Add(Return_btn);

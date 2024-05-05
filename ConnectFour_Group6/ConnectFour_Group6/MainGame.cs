@@ -278,6 +278,8 @@ namespace ConnectFour_Group6
             if (form1.getPrevGame() != null)
             {
                 this.Hide();
+                form1.getPrevGame().btn_PlayAgain.Visible = false;
+                form1.getPrevGame().btn_showPrevGame.Visible = false;
                 form1.getPrevGame().btn_return.Visible = true;
                 form1.getPrevGame().Show();
 
@@ -286,8 +288,7 @@ namespace ConnectFour_Group6
 
         private void btn_PlayAgain_Click(object sender, EventArgs e)
         {
-            btn_PlayAgain.Visible = false;
-            btn_showPrevGame.Visible = false;
+            
             gameBoard.setPlayerTurn(false);
             gameBoard.setPlayerTwoTurn(false);
             depth = 0;
@@ -303,7 +304,7 @@ namespace ConnectFour_Group6
             {
                 if (player == 1)
                 {
-                    statsForm sf = new statsForm(1);
+                    statsForm sf = new statsForm(1, form1);
                     lbl_winText.Text = "Player 1 wins!";
                     lbl_winText.Visible = true;
                     gameBoard.setPlayerTurn(false);
@@ -316,7 +317,7 @@ namespace ConnectFour_Group6
                 {
                     if (mode == 1)
                     {
-                        statsForm sf = new statsForm(2);
+                        statsForm sf = new statsForm(2, form1);
                         lbl_winText.Text = "AI wins";
                         lbl_winText.Visible = true;
                         gameBoard.setPlayerTurn(false);
@@ -327,7 +328,7 @@ namespace ConnectFour_Group6
                     }
                     else
                     {
-                        statsForm sf = new statsForm(3);
+                        statsForm sf = new statsForm(3, form1);
                         lbl_winText.Text = "Player 2 wins!";
                         lbl_winText.Visible = true;
                         gameBoard.setPlayerTurn(false);
@@ -347,7 +348,7 @@ namespace ConnectFour_Group6
         {
             if (checkFilled())
             {
-                statsForm sf = new statsForm(4);
+                statsForm sf = new statsForm(4, form1);
                 lbl_winText.Text = "Tie!";
                 lbl_winText.Visible = true;
                 gameBoard.setPlayerTurn(false);
