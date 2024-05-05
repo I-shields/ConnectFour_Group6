@@ -34,46 +34,55 @@ namespace ConnectFour_Group6
             mode = m;
         }
 
+        //get number of rows
         public int getNumofRows()
         {
             return numOfRows;
         }
 
+        //get number of columns
         public int getNumofCols()
         {
             return numOfCols;
         }
 
+        //get cell at (row, column)
         public Cell getCell(int r, int c)
         {
             return gameBoard[r, c];
         }
 
+        //return the 2d array of cells (gameboard)
         public Cell[,] getGameBoard()
         {
             return gameBoard;
         }
 
+        //replace a cell
         public void setGameBoardCell(Cell cell)
         {
             gameBoard[cell.getRow(), cell.getCol()] = cell;
         }
 
+        //return player piece color
         public Color getPlayerColor()
         {
             return playerColor;
         }
 
+        //return AI color, or player 2
         public Color getLibbyColor()
         {
             return libbyColor;
         }
 
+        //get playerturn
         public bool isPlayerTurn()
         {
             return playerTurn;
         }
 
+        //return the lowest row in a column
         public int getLowestRow(int c)
         {
             Cell cell;
@@ -97,6 +106,7 @@ namespace ConnectFour_Group6
             return row;
         }
 
+        //checks if the cell at (r, c) is open
         public bool checkPos(int r, int c)
         {
             if (r < numOfRows && c < numOfCols && gameBoard[r, c].getButton().BackColor != playerColor && gameBoard[r, c].getButton().BackColor != libbyColor)
@@ -109,6 +119,7 @@ namespace ConnectFour_Group6
             }
         }
 
+        //preview logic
         public void preview(int c)
         {
             int lr = getLowestRow(c);
@@ -123,6 +134,7 @@ namespace ConnectFour_Group6
             }
         }
 
+        //clear preview
         public void clearPreview()
         {
             foreach (Cell cell in gameBoard)
@@ -134,6 +146,7 @@ namespace ConnectFour_Group6
             }
         }
 
+        //place a piece on the board
         public void placePiece(int c)
         {
             int lr = getLowestRow(c);

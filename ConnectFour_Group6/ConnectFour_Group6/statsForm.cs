@@ -15,6 +15,7 @@ namespace ConnectFour_Group6
         private SaveInfo si;
         public statsForm(int p)
         {
+            //display the info saved in the text file
             si = new SaveInfo();
             InitializeComponent();
             List<int[]> statList = new List<int[]>();

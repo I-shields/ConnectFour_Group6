@@ -42,6 +42,12 @@ namespace ConnectFour_Group6
             return btn;
         }
 
+        public int getPlayer()
+        {
+            return player;
+        }
+
+
         //====Setters====
         public void setRow(int r)
         {
@@ -63,9 +69,5 @@ namespace ConnectFour_Group6
             player = p;
         }
 
-        public int getPlayer()
-        {
-            return player;
-        }
     }
 }

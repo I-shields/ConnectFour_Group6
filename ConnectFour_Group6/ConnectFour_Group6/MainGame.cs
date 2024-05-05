@@ -29,6 +29,7 @@ namespace ConnectFour_Group6
             form1 = form;
             if (selector == 1)
             {
+                //constructors and button handler
                 saver = new SaveInfo();
                 mode = 1;
                 gameBoard = new Board(mode);
@@ -103,6 +104,7 @@ namespace ConnectFour_Group6
 
         public void setUpGame()
         {
+            //build board
             string name;
             char delim = '_';
             int posDelim;
@@ -131,6 +133,7 @@ namespace ConnectFour_Group6
 
         private void placePiece(object sender, EventArgs e)
         {
+            //place a piece
             if (gameBoard.isPlayerTurn())
             {
                 string btnName;
@@ -156,6 +159,7 @@ namespace ConnectFour_Group6
                 //if it's player vs AI, run the AI
                 if (mode == 1)
                 {
+                    //set the depth
                     int column;
                     depthSet = true;
                     if (Depth_box.Text != "")
@@ -170,11 +174,11 @@ namespace ConnectFour_Group6
                     {
                         depth = 7;
                     }
-                    Debug.WriteLine("Depth: " + depth);
+                    //store column to play
                     column = stacy.initialBoard(gameBoard, depth);
-
+                    //place the piece
                     gameBoard.placePiece(column);
-
+                    //check for wins/ties
                     if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                     {
                         saver.updateFile(2, depth);
@@ -184,10 +188,11 @@ namespace ConnectFour_Group6
                     {
                         displayTieState();
                     }
+                    //display board evaluations done by the AI
                     string numsofboards = String.Format($"{stacy.getIter():n0}");
                     Iterations_Lbl.Text = ("Boards evaluated by AI: " + numsofboards);
                     stacy.setIter(0);
-
+                    //clear "depth setter"
                     if (depthSet)
                     {
                         Depth_box.Visible = false;
@@ -206,6 +211,7 @@ namespace ConnectFour_Group6
             }
             else if (gameBoard.isPlayerTwoTurn() && mode == 2)
             {
+                //logic for player 2 in PVP
                 string btnName;
                 int col;
                 btnName = ((Button)sender).Name;
@@ -226,7 +232,7 @@ namespace ConnectFour_Group6
 
         private void setPreview(object sender, EventArgs e)
         {
-
+            //preview the piece
             if (gameBoard.isPlayerTurn())
             {
                 string btnName;
@@ -249,6 +255,7 @@ namespace ConnectFour_Group6
 
         private void clearPreview(object sender, EventArgs e)
         {
+            //clear the preview
             gameBoard.clearPreview();
         }
 
@@ -454,7 +461,7 @@ namespace ConnectFour_Group6
                         break;
                     }
                 }
-                if (horcount==4)
+                if (horcount >= 4)
                 {
                     Debug.WriteLine("Read Test Successful");
                     return true;
@@ -484,7 +491,7 @@ namespace ConnectFour_Group6
                         break;
                     }
                 }
-                if (diagrightcount == 4)
+                if (diagrightcount >= 4)
                 {
                     Debug.WriteLine("Read Test Successful");
                     return true;
@@ -513,7 +520,7 @@ namespace ConnectFour_Group6
                         break;
                     }
                 }
-                if (diagleftcount== 4)
+                if (diagleftcount >= 4)
                 {
                     Debug.WriteLine("Read Test Successful");
                     return true;
@@ -563,7 +570,7 @@ namespace ConnectFour_Group6
                         break;
                     }
                 }
-                if (horcount == 4)
+                if (horcount >= 4)
                 {
                     Debug.WriteLine("Read Test Successful");
                     return true;
@@ -593,7 +600,7 @@ namespace ConnectFour_Group6
                         break;
                     }
                 }
-                if (diagrightcount == 4)
+                if (diagrightcount >= 4)
                 {
                     Debug.WriteLine("Read Test Successful");
                     return true;
@@ -622,7 +629,7 @@ namespace ConnectFour_Group6
                         break;
                     }
                 }
-                if (diagleftcount == 4)
+                if (diagleftcount >= 4)
                 {
                     Debug.WriteLine("Read Test Successful");
                     return true;

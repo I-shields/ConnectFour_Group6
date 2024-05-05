@@ -18,6 +18,7 @@ namespace ConnectFour_Group6
 
         public int iter = 0;
 
+        //stucts to hold info
         public struct colInfo
         {
             public int startRow;
@@ -60,16 +61,19 @@ namespace ConnectFour_Group6
             return column;
         }
 
+        //get the iteration count (amount of boards evaluated)
         public int getIter()
         {
             return iter;
         }
 
+        //set iteration count
         public void setIter(int it)
         {
             iter = it;
         }
 
+        //copy the gameboard to a 2D array
         public int initialBoard(Board b, int depth)
         {
             Cell[,] boardArray;
@@ -89,6 +93,7 @@ namespace ConnectFour_Group6
                 }
             }
 
+            //start minimax
             int alpha = int.MinValue;
             int beta = int.MaxValue;
             int[] result = backToTheFuture(boardArray, depth, alpha, beta, true);
@@ -96,6 +101,7 @@ namespace ConnectFour_Group6
             return move;
         }
 
+        //return the score of rows, columns, and diagonals
         public int scores(List<rowInfo> list)
         {
             int score = 0;
@@ -147,6 +153,7 @@ namespace ConnectFour_Group6
             return score;
         }
 
+        //convert the values of each cell into a 2D array
         public int[,] buildValues()
         {
             int[,] boardValues = new int[6, 7];
@@ -174,6 +181,7 @@ namespace ConnectFour_Group6
             return boardValues;
         }
 
+        //get a list of all columns, rows, and diagonals
         public List<colInfo> GetCols(Cell[,] b, int player)
         {
 
@@ -582,6 +590,8 @@ namespace ConnectFour_Group6
             }
         }
 
+
+        //check if theres a win, by player (p) in the 2D array passed to the function
         public bool checkWins(Cell[,] b, int p)
         {
             for (int i = 0; i < 7; i++)
@@ -630,6 +640,7 @@ namespace ConnectFour_Group6
             return false;
         }
 
+        //return the lowest row in the column
         public int getLowest(Cell[,] b, int c)
         {
             for (int i = 0; i < 6; i++)
@@ -642,6 +653,7 @@ namespace ConnectFour_Group6
             return -1;
         }
 
+        //add all the scores together
         public int[] getScores(Cell[,] b)
         {
             int[] scoreset;
@@ -692,6 +704,7 @@ namespace ConnectFour_Group6
             return scoreset;
         }
 
+        //make a new 2D array based on the 2D array passed to it
         public Cell[,] rebuildBoard(Cell[,] b)
         {
             Cell[,] gameBoard;
@@ -709,6 +722,7 @@ namespace ConnectFour_Group6
             return gameBoard;
         }
 
+        //minimax
         public int[] backToTheFuture(Cell[,] b, int depth, int alpha, int beta, bool maximizingPlayer)
         {
             int[] infoReturn;
@@ -741,18 +755,19 @@ namespace ConnectFour_Group6
                 }
                 else
                 {
+
                     if (maximizingPlayer)
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[1];
+                        infoReturn[1] = getScores(b)[0];
                         return infoReturn;
                     }
                     else
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[0];
+                        infoReturn[1] = getScores(b)[1];
                         return infoReturn;
                     }
                 }
@@ -837,6 +852,7 @@ namespace ConnectFour_Group6
             }
         }
 
+        //checks if theres a win or tie
         public bool isEnd(Cell[,] b)
         {
             if(checkWins(b,1))

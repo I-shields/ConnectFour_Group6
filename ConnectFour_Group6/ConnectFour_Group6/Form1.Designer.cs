@@ -67,13 +67,16 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(800, 517);
             Controls.Add(ShowStats_Btn);
             Controls.Add(btn_pvp);
             Controls.Add(StartAI);
+            ForeColor = Color.FromArgb(128, 128, 255);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Main Menu";
+            TransparencyKey = Color.Black;
             FormClosed += Form1_FormClosed;
             ResumeLayout(false);
         }

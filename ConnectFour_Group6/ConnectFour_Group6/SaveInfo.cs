@@ -21,6 +21,7 @@ namespace ConnectFour_Group6
             int[] stats;
             stats = new int[5];
             statList = readFile();
+            // if there's nothing in the text file, make a new entry
             if(statList.Count == 0)
             {
                 stats[0] = d;
@@ -42,6 +43,9 @@ namespace ConnectFour_Group6
             }
             else
             {
+                //check if there's stats for the depth
+                //true = update current stats
+                //false = make new entry
                 bool notInList = true;
                 foreach (int[] stat in statList)
                 {
@@ -87,6 +91,7 @@ namespace ConnectFour_Group6
 
         }
 
+        //read the values saved in the text file
         public List<int[]> readFile()
         {
             List<int[]> statList = new List<int[]>();
@@ -129,6 +134,7 @@ namespace ConnectFour_Group6
             }
         }
 
+        //write passed values to text file
         private void writeToFile(List<int[]> statList)
         {
             FileInfo finfo = new FileInfo("..//..//..//Stats.txt");

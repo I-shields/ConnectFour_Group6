@@ -68,6 +68,7 @@ namespace ConnectFour_Group6
 
         private void ShowStats_Btn_Click(object sender, EventArgs e)
         {
+            //start the stats
             statsForm sf = new statsForm(0);
             this.Hide();
             sf.Show();
@@ -75,6 +76,7 @@ namespace ConnectFour_Group6
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //exit the program
             Environment.Exit(1);
         }
     }
