@@ -84,6 +84,7 @@
             Depth_Lbl = new Label();
             WarningRtb = new RichTextBox();
             Iterations_Lbl = new Label();
+            btn_return = new Button();
             SuspendLayout();
             // 
             // Column1
@@ -551,11 +552,23 @@
             Iterations_Lbl.Size = new Size(0, 15);
             Iterations_Lbl.TabIndex = 57;
             // 
+            // btn_return
+            // 
+            btn_return.Location = new Point(617, 424);
+            btn_return.Name = "btn_return";
+            btn_return.Size = new Size(171, 23);
+            btn_return.TabIndex = 58;
+            btn_return.Text = "Return to Main Game";
+            btn_return.UseVisualStyleBackColor = true;
+            btn_return.Visible = false;
+            btn_return.Click += btn_return_Click;
+            // 
             // MainGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_return);
             Controls.Add(Iterations_Lbl);
             Controls.Add(WarningRtb);
             Controls.Add(Depth_Lbl);
@@ -679,5 +692,6 @@
         private Label Depth_Lbl;
         private RichTextBox WarningRtb;
         private Label Iterations_Lbl;
+        private Button btn_return;
     }
 }

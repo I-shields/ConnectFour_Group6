@@ -275,12 +275,19 @@ namespace ConnectFour_Group6
         {
             if (form1.getPrevGame() != null)
             {
+                this.Hide();
+                form1.getPrevGame().btn_return.Visible = true;
                 form1.getPrevGame().Show();
+
             }
         }
 
         private void btn_PlayAgain_Click(object sender, EventArgs e)
         {
+            btn_PlayAgain.Visible = false;
+            btn_showPrevGame.Visible = false;
+            gameBoard.setPlayerTurn(false);
+            gameBoard.setPlayerTwoTurn(false);
             depth = 0;
             form1.setPrevGame(this);
             this.Hide();
@@ -289,7 +296,7 @@ namespace ConnectFour_Group6
 
         public void displayWinState(bool b, int player)
         {
-            
+
             if (b == true)
             {
                 if (player == 1)
@@ -301,6 +308,7 @@ namespace ConnectFour_Group6
                     gameBoard.setPlayerTwoTurn(false);
                     sf.Show();
                     this.Hide();
+                    form1.setPrevGame(this);
                 }
                 else if (player == 2)
                 {
@@ -313,6 +321,7 @@ namespace ConnectFour_Group6
                         gameBoard.setPlayerTwoTurn(false);
                         sf.Show();
                         this.Hide();
+                        form1.setPrevGame(this);
                     }
                     else
                     {
@@ -323,8 +332,9 @@ namespace ConnectFour_Group6
                         gameBoard.setPlayerTwoTurn(false);
                         sf.Show();
                         this.Hide();
+                        form1.setPrevGame(this);
                     }
-                    
+
                     this.Hide();
                 }
             }
@@ -342,6 +352,7 @@ namespace ConnectFour_Group6
                 gameBoard.setPlayerTwoTurn(false);
                 sf.Show();
                 this.Hide();
+                form1.setPrevGame(this);
             }
         }
 
@@ -364,7 +375,7 @@ namespace ConnectFour_Group6
                 }
             }
 
-            if (filledCells==42)
+            if (filledCells == 42)
             {
                 return true;
             }
@@ -420,7 +431,7 @@ namespace ConnectFour_Group6
             Color libbyColor = Color.Yellow;
             if (!gameBoard.isPlayerTurn())
             {
-                
+
                 //vert
                 for (int i = 1; i < 4; i++)
                 {
@@ -466,7 +477,7 @@ namespace ConnectFour_Group6
                     Debug.WriteLine("Read Test Successful");
                     return true;
                 }
-                
+
                 //diag up right
                 for (int i = 1; i < 4; i++)
                 {
@@ -525,10 +536,10 @@ namespace ConnectFour_Group6
                     Debug.WriteLine("Read Test Successful");
                     return true;
                 }
-                
+
                 return false;
             }
-            else if (!gameBoard.isPlayerTwoTurn() || mode==1)
+            else if (!gameBoard.isPlayerTwoTurn() || mode == 1)
             {
                 //vert
                 for (int i = 1; i < 4; i++)
@@ -654,6 +665,12 @@ namespace ConnectFour_Group6
         private void MainGame_FormClosed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void btn_return_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            form1.getCurGame().Show();
         }
     }
 

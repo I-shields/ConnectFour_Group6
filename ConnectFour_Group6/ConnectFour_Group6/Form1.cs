@@ -9,6 +9,7 @@ namespace ConnectFour_Group6
     //required variables
     {
         MainGame prevgame = new MainGame();
+        MainGame curgame;
         public Form1()
         {
             InitializeComponent();
@@ -17,6 +18,7 @@ namespace ConnectFour_Group6
         private void StartAI_Click_1(object sender, EventArgs e)
         {
             MainGame mg = new MainGame(1, this);
+            curgame = mg;
             this.Hide();
             mg.Show();
         }
@@ -54,6 +56,7 @@ namespace ConnectFour_Group6
             MainGame mg = new MainGame(2, this);
             this.Hide();
             mg.Show();
+            curgame = mg;
         }
 
         public void setPrevGame(MainGame game)
@@ -78,6 +81,11 @@ namespace ConnectFour_Group6
         {
             //exit the program
             Environment.Exit(1);
+        }
+
+        public MainGame getCurGame()
+        {
+            return curgame;
         }
     }
 }
