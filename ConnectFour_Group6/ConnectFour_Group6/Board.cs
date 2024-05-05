@@ -21,13 +21,13 @@ namespace ConnectFour_Group6
         private bool playerTwoTurn = false;
         int mode;
 
-        Color playerColor = Color.Red;
-        Color playerPreview = Color.FromArgb(50, 255, 0, 0);
+        private Color playerColor = Color.Red;
+        private Color playerPreview = Color.FromArgb(50, 255, 0, 0);
 
         //====AI IS KNOWN AS LIBBY!!====
         //====AI updated to stacy====
-        Color libbyColor = Color.Yellow;
-        Color libbyPreviw = Color.FromArgb(50, 255, 222, 0);
+        private Color libbyColor = Color.Yellow;
+        private Color libbyPreviw = Color.FromArgb(50, 255, 222, 0);
 
         public Board(int m)
         {

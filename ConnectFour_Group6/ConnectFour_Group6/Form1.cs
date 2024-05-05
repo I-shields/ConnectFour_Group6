@@ -1,3 +1,7 @@
+//Joshua Sell and Isaac Shields
+//Program that plays connect four in vs. AI mode or two player mode
+//5-5-2024
+
 using System.Diagnostics;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;

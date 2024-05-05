@@ -8,10 +8,10 @@ namespace ConnectFour_Group6
 {
     internal class Cell
     {
-        int row;
-        int col;
-        Button btn;
-        int player;
+        private int row;
+        private int col;
+        private Button btn;
+        private int player;
 
         public Cell()
         {
