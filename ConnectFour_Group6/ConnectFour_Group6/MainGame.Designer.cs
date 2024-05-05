@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGame));
             Column1 = new Button();
             Column2 = new Button();
             Column3 = new Button();
@@ -85,6 +86,8 @@
             WarningRtb = new RichTextBox();
             Iterations_Lbl = new Label();
             btn_return = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
             SuspendLayout();
             // 
             // Column1
@@ -93,7 +96,7 @@
             Column1.Name = "Column1";
             Column1.Size = new Size(50, 45);
             Column1.TabIndex = 0;
-            Column1.Text = "Column1";
+            Column1.Text = "Drop!";
             Column1.UseVisualStyleBackColor = true;
             // 
             // Column2
@@ -102,7 +105,7 @@
             Column2.Name = "Column2";
             Column2.Size = new Size(50, 45);
             Column2.TabIndex = 1;
-            Column2.Text = "Column2";
+            Column2.Text = "Drop!";
             Column2.UseVisualStyleBackColor = true;
             // 
             // Column3
@@ -111,7 +114,7 @@
             Column3.Name = "Column3";
             Column3.Size = new Size(50, 45);
             Column3.TabIndex = 2;
-            Column3.Text = "Column3";
+            Column3.Text = "Drop!";
             Column3.UseVisualStyleBackColor = true;
             // 
             // Column4
@@ -120,7 +123,7 @@
             Column4.Name = "Column4";
             Column4.Size = new Size(50, 45);
             Column4.TabIndex = 3;
-            Column4.Text = "Column4";
+            Column4.Text = "Drop!";
             Column4.UseVisualStyleBackColor = true;
             // 
             // Column5
@@ -129,7 +132,7 @@
             Column5.Name = "Column5";
             Column5.Size = new Size(50, 45);
             Column5.TabIndex = 4;
-            Column5.Text = "Column5";
+            Column5.Text = "Drop!";
             Column5.UseVisualStyleBackColor = true;
             Column5.Click += Column5_Click;
             // 
@@ -139,11 +142,12 @@
             Column6.Name = "Column6";
             Column6.Size = new Size(50, 45);
             Column6.TabIndex = 5;
-            Column6.Text = "Column6";
+            Column6.Text = "Drop!";
             Column6.UseVisualStyleBackColor = true;
             // 
             // Cell_0_0
             // 
+            Cell_0_0.Image = (Image)resources.GetObject("Cell_0_0.Image");
             Cell_0_0.Location = new Point(54, 348);
             Cell_0_0.Name = "Cell_0_0";
             Cell_0_0.Size = new Size(50, 50);
@@ -484,7 +488,7 @@
             Column7.Name = "Column7";
             Column7.Size = new Size(50, 45);
             Column7.TabIndex = 6;
-            Column7.Text = "Column7";
+            Column7.Text = "Drop!";
             Column7.UseVisualStyleBackColor = true;
             // 
             // btn_showPrevGame
@@ -563,10 +567,27 @@
             btn_return.Visible = false;
             btn_return.Click += btn_return_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(213, 146, 55);
+            panel1.Location = new Point(49, 68);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(396, 338);
+            panel1.TabIndex = 59;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Lime;
+            panel2.Location = new Point(49, 4);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(396, 66);
+            panel2.TabIndex = 60;
+            // 
             // MainGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(0, 64, 0);
             ClientSize = new Size(800, 450);
             Controls.Add(btn_return);
             Controls.Add(Iterations_Lbl);
@@ -625,6 +646,8 @@
             Controls.Add(Cell_2_6);
             Controls.Add(Cell_3_6);
             Controls.Add(Cell_4_6);
+            Controls.Add(panel1);
+            Controls.Add(panel2);
             Name = "MainGame";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MainGame";
@@ -693,5 +716,7 @@
         private RichTextBox WarningRtb;
         private Label Iterations_Lbl;
         private Button btn_return;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

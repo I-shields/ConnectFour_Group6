@@ -1,4 +1,9 @@
-﻿using System;
+﻿//==================================================
+//Name: Isaac Shields
+//
+//Desc. Class to handle CRUD of stats
+//===================================================
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;

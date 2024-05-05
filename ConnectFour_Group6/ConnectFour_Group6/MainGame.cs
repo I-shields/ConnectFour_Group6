@@ -181,11 +181,13 @@ namespace ConnectFour_Group6
                     //check for wins/ties
                     if (checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                     {
+                        form1.setPrevGame(this);
                         saver.updateFile(2, depth);
                         displayWinState(true, 2);
                     }
                     else if (!checkWin(gameBoard.getCurCell().getRow(), gameBoard.getCurCell().getCol()))
                     {
+                        form1.setPrevGame(this);
                         displayTieState();
                     }
                     //display board evaluations done by the AI
@@ -420,7 +422,6 @@ namespace ConnectFour_Group6
             //    return false;
             //}
         }
-
 
         public bool checkWin(int row, int col)
         {

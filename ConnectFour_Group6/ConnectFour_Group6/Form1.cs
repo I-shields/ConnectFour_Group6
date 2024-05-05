@@ -8,7 +8,7 @@ namespace ConnectFour_Group6
     public partial class Form1 : Form
     //required variables
     {
-        MainGame prevgame = new MainGame();
+        private MainGame prevgame = new MainGame();
         MainGame curgame;
         public Form1()
         {
@@ -73,8 +73,8 @@ namespace ConnectFour_Group6
         {
             //start the stats
             statsForm sf = new statsForm(5);
-            this.Hide();
             sf.Show();
+            this.Hide();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -86,6 +86,11 @@ namespace ConnectFour_Group6
         public MainGame getCurGame()
         {
             return curgame;
+        }
+
+        private void Exit_Btn_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(1);
         }
     }
 }

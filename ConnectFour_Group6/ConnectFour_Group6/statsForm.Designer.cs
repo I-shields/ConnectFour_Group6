@@ -163,7 +163,7 @@
             // 
             Return_btn.Location = new Point(648, 415);
             Return_btn.Name = "Return_btn";
-            Return_btn.Size = new Size(106, 23);
+            Return_btn.Size = new Size(126, 23);
             Return_btn.TabIndex = 12;
             Return_btn.Text = "Main Menu";
             Return_btn.UseVisualStyleBackColor = true;
@@ -172,12 +172,13 @@
             // Win_Lbl
             // 
             Win_Lbl.AutoSize = true;
-            Win_Lbl.Location = new Point(648, 334);
+            Win_Lbl.Location = new Point(648, 397);
             Win_Lbl.Name = "Win_Lbl";
             Win_Lbl.Size = new Size(126, 15);
             Win_Lbl.TabIndex = 13;
             Win_Lbl.Text = "Who won place holder";
             Win_Lbl.Visible = false;
+            Win_Lbl.Click += Win_Lbl_Click;
             // 
             // statsForm
             // 
@@ -202,6 +203,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "statsForm";
             FormClosed += statsForm_FormClosed;
+            Load += statsForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

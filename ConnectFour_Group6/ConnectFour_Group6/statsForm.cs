@@ -1,4 +1,9 @@
-﻿using System;
+﻿//==================================================
+//Name: Isaac Shields
+//
+//Desc. Form to display stats.
+//===================================================
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +15,7 @@ using System.Windows.Forms;
 
 namespace ConnectFour_Group6
 {
+    
     public partial class statsForm : Form
     {
         private SaveInfo si;
@@ -79,6 +85,26 @@ namespace ConnectFour_Group6
             Form1 mf = new Form1();
             mf.Show();
             this.Hide();
+        }
+
+        private void newGame_Btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Win_Lbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PlayerVsPlayer_Btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

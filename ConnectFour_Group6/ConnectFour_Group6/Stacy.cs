@@ -1,4 +1,12 @@
-﻿using System;
+﻿//==================================================
+//Name: Isaac Shields
+//
+//Desc. AI that uses a MiniMax algorithm with 
+//      Alpha-Beta pruning to find the best move
+//      this is my first time writing a minimax
+//      please give feedback and report any issues
+//===================================================
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -731,27 +739,26 @@ namespace ConnectFour_Group6
                 iter++;
                 if (isEnd(b))
                 {
-                    if (checkWins(b, 2))
+                    if(checkWins(b, 2))
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
                         infoReturn[1] = int.MaxValue-1;
-                        return infoReturn;
                     }
-                    if (checkWins(b, 1))
+                    else if(checkWins(b, 1))
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
                         infoReturn[1] = int.MinValue+1;
-                        return infoReturn;
                     }
                     else
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = int.MinValue+2;
-                        return infoReturn;
+                        infoReturn[1] = int.MinValue + 1;
+
                     }
+                    return infoReturn;
                 }
                 else
                 {
