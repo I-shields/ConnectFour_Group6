@@ -755,7 +755,7 @@ namespace ConnectFour_Group6
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = int.MinValue + 1;
+                        infoReturn[1] = int.MinValue + 2;
 
                     }
                     return infoReturn;
@@ -767,14 +767,14 @@ namespace ConnectFour_Group6
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[0];
+                        infoReturn[1] = getScores(b)[1];
                         return infoReturn;
                     }
                     else
                     {
                         infoReturn = new int[2];
                         infoReturn[0] = 0;
-                        infoReturn[1] = getScores(b)[1];
+                        infoReturn[1] = getScores(b)[0];
                         return infoReturn;
                     }
                 }
